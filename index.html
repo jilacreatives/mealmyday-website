@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MealMyDay – Mahlzeitenpläne, die zu dir passen</title>
+  <meta name="description" content="MealMyDay erstellt Mahlzeitenpläne für 3 Tage oder bis zu vier Wochen – passend zu Ziel, Ernährungsweise und Allergien. Mit Mengen aufs Gramm, Kalorien, Makros und fertiger Einkaufsliste. Bald für Android und iPhone.">
+  <link rel="canonical" href="https://mealmyday.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MealMyDay">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:url" content="https://mealmyday.app/">
+  <meta property="og:title" content="MealMyDay – Mahlzeitenpläne, die zu dir passen">
+  <meta property="og:description" content="Mahlzeitenpläne für 3 Tage oder bis zu vier Wochen, passend zu Ziel, Ernährungsweise und Allergien. Mengen aufs Gramm, Kalorien, Makros und fertige Einkaufsliste.">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121915" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site.js" defer></script>
+  <script src="animation.js" defer></script>
+  <script src="warteliste.js" defer></script>
+  <script src="beispielplaner.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+  <!-- Zutaten-Illustrationen als wiederverwendbare SVG-Symbole (flacher Stil, Farben der App) -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="z-ei" viewBox="0 0 64 64">
+        <path d="M15 37c-3-9 4-21 17-21 6 0 9 3 13 3 4 0 7 4 7 10 0 12-7 19-19 19S18 44 15 37z" fill="#FFFCF5" stroke="#E6DAC4" stroke-width="2"/>
+        <circle cx="32" cy="34" r="9" fill="#F5B331"/><circle cx="29" cy="31" r="3" fill="#FFD66B"/>
+      </symbol>
+      <symbol id="z-avocado" viewBox="0 0 64 64">
+        <path d="M32 5c11 0 20 14 20 30 0 13-9 24-20 24S12 48 12 35C12 19 21 5 32 5z" fill="#3F7A36"/>
+        <path d="M32 11c7 0 14 12 14 24 0 10-6 17-14 17s-14-7-14-17c0-12 7-24 14-24z" fill="#C6DF7C"/>
+        <circle cx="32" cy="40" r="7.5" fill="#8B5A2B"/><circle cx="29.5" cy="37.5" r="2.2" fill="#B98556"/>
+      </symbol>
+      <symbol id="z-tomate" viewBox="0 0 64 64">
+        <circle cx="32" cy="36" r="22" fill="#E04A36"/>
+        <ellipse cx="23" cy="29" rx="5" ry="3.5" transform="rotate(-30 23 29)" fill="#F58A78" opacity=".9"/>
+        <path d="M32 8l3 7 8-2-5 6 7 4-8 1 1 7-6-4-6 4 1-7-8-1 7-4-5-6 8 2z" fill="#4E8C3C"/>
+      </symbol>
+      <symbol id="z-brokkoli" viewBox="0 0 64 64">
+        <path d="M27 38h10v14a5 5 0 0 1-10 0z" fill="#B9D28C"/>
+        <circle cx="32" cy="27" r="14" fill="#4B8A3A"/>
+        <circle cx="18" cy="31" r="9" fill="#5A9C45"/><circle cx="46" cy="31" r="9" fill="#5A9C45"/>
+        <circle cx="23" cy="17" r="8" fill="#6DAE52"/><circle cx="41" cy="17" r="8" fill="#6DAE52"/><circle cx="32" cy="13" r="6" fill="#7DBB5E"/>
+      </symbol>
+      <symbol id="z-lachs" viewBox="0 0 64 64">
+        <path d="M7 41c6-15 22-26 50-27-1 13-6 25-17 33-11 4-25 2-33-6z" fill="#F08466"/>
+        <path d="M18 43c7-9 16-16 28-22M13 47c9-11 20-20 36-27" stroke="#FFD5C4" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </symbol>
+      <symbol id="z-haehnchen" viewBox="0 0 64 64">
+        <path d="M26 9c12-7 30 1 30 16 0 11-9 19-19 19-3 0-6-1-8-2l-9 9a5 5 0 0 1-7-7l9-9c-2-3-3-6-3-9 0-8 3-14 7-17z" fill="#D29660"/>
+        <path d="M30 16c8-4 18 0 20 8" stroke="#E8B27E" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <circle cx="12" cy="52" r="5" fill="#FFF7EC"/><circle cx="18" cy="57" r="5" fill="#FFF7EC"/>
+      </symbol>
+      <symbol id="z-hafer" viewBox="0 0 64 64">
+        <path d="M8 31h48c0 14-10 24-24 24S8 45 8 31z" fill="#E6D3B3"/>
+        <ellipse cx="32" cy="31" rx="24" ry="7" fill="#F5E9D7"/>
+        <g fill="#D9B46B"><ellipse cx="21" cy="30" rx="4.5" ry="2.6" transform="rotate(-20 21 30)"/><ellipse cx="32" cy="28" rx="4.5" ry="2.6" transform="rotate(12 32 28)"/><ellipse cx="43" cy="30" rx="4.5" ry="2.6" transform="rotate(-8 43 30)"/><ellipse cx="27" cy="34" rx="3.5" ry="2.2" transform="rotate(20 27 34)"/><ellipse cx="38" cy="34" rx="3.5" ry="2.2" transform="rotate(-15 38 34)"/></g>
+        <path d="M8 31h48" stroke="#D2BC98" stroke-width="2"/>
+      </symbol>
+      <symbol id="z-beeren" viewBox="0 0 64 64">
+        <circle cx="21" cy="39" r="12" fill="#4F60A8"/><circle cx="43" cy="37" r="11" fill="#5C6FBE"/><circle cx="32" cy="22" r="10" fill="#6A7ED0"/>
+        <circle cx="21" cy="39" r="3" fill="#2F3C6E"/><circle cx="43" cy="37" r="2.8" fill="#2F3C6E"/><circle cx="32" cy="22" r="2.5" fill="#2F3C6E"/>
+        <circle cx="16" cy="34" r="2.5" fill="#9AA8E6" opacity=".9"/><circle cx="38" cy="32" r="2.2" fill="#9AA8E6" opacity=".9"/><circle cx="28" cy="18" r="2" fill="#9AA8E6" opacity=".9"/>
+      </symbol>
+      <symbol id="z-banane" viewBox="0 0 64 64">
+        <path d="M11 21c3 17 14 29 32 31 8 1 14-2 16-7-15 3-29-6-37-26-2-5-9-4-11 2z" fill="#F4C842"/>
+        <path d="M14 22c4 14 13 24 29 27" stroke="#E0AC28" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M57 44l5 2-4 3z" fill="#7B5A2A"/><path d="M11 21c0-4 2-6 5-6" stroke="#7B5A2A" stroke-width="3" stroke-linecap="round" fill="none"/>
+      </symbol>
+      <symbol id="z-brot" viewBox="0 0 64 64">
+        <path d="M10 27a12 12 0 0 1 12-12h20a12 12 0 0 1 12 12v25H10z" fill="#A66B3C"/>
+        <path d="M16 29a8 8 0 0 1 8-8h16a8 8 0 0 1 8 8v18H16z" fill="#EBD2A8"/>
+        <g fill="#8B5A2B"><circle cx="26" cy="33" r="1.8"/><circle cx="37" cy="29" r="1.8"/><circle cx="41" cy="40" r="1.8"/><circle cx="29" cy="43" r="1.8"/><circle cx="34" cy="37" r="1.5"/></g>
+      </symbol>
+      <symbol id="z-kaese" viewBox="0 0 64 64">
+        <path d="M8 25l44-11 5 9v27H8z" fill="#F4C84A"/><path d="M8 25l44-11 5 9-44 9z" fill="#F9DC80"/>
+        <circle cx="22" cy="40" r="3.6" fill="#E3AE2C"/><circle cx="39" cy="44" r="3" fill="#E3AE2C"/><circle cx="32" cy="34" r="2" fill="#E3AE2C"/><circle cx="48" cy="36" r="2" fill="#E3AE2C"/>
+      </symbol>
+      <symbol id="z-nuesse" viewBox="0 0 64 64">
+        <ellipse cx="21" cy="37" rx="10" ry="15" transform="rotate(-25 21 37)" fill="#B47C47"/><ellipse cx="21" cy="37" rx="5" ry="10" transform="rotate(-25 21 37)" fill="#CC9962"/>
+        <ellipse cx="43" cy="33" rx="10" ry="15" transform="rotate(22 43 33)" fill="#8E5C2C"/><ellipse cx="43" cy="33" rx="5" ry="10" transform="rotate(22 43 33)" fill="#AD7640"/>
+      </symbol>
+      <symbol id="z-linsen" viewBox="0 0 64 64">
+        <path d="M10 42c4-13 13-19 22-19s18 6 22 19z" fill="#E08A3C"/>
+        <g fill="#F2A65A"><circle cx="21" cy="38" r="4"/><circle cx="32" cy="31" r="4"/><circle cx="43" cy="38" r="4"/><circle cx="26" cy="28" r="3"/><circle cx="39" cy="28" r="3"/><circle cx="32" cy="38" r="3"/></g>
+        <path d="M6 42h52c0 7-12 12-26 12S6 49 6 42z" fill="#E6D3B3"/><path d="M6 42h52" stroke="#D2BC98" stroke-width="2"/>
+      </symbol>
+      <symbol id="z-paprika" viewBox="0 0 64 64">
+        <path d="M20 20c-8 0-13 8-13 18s8 19 13 19h24c5 0 13-9 13-19s-5-18-13-18c-4 0-6 2-12 2s-8-2-12-2z" fill="#D9402C"/>
+        <path d="M26 22c-1 12 1 24 6 33 5-9 7-21 6-33" stroke="#B5301F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M32 7c3 4 3 9 0 13" stroke="#4E8C3C" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <ellipse cx="16" cy="30" rx="3" ry="6" fill="#F07A68" opacity=".7"/>
+      </symbol>
+      <symbol id="z-karotte" viewBox="0 0 64 64">
+        <path d="M45 12L20 55a4.5 4.5 0 0 1-8-4l24-43z" fill="#F08A3D"/>
+        <path d="M30 24l8 2M26 33l8 2M22 42l7 2" stroke="#D7702A" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M45 12c-7-6-16-5-19 1 7-2 13 0 19 1zM45 12c1-9-5-14-12-14 5 4 8 9 12 14z" fill="#5A9C45"/>
+      </symbol>
+      <symbol id="z-zitrone" viewBox="0 0 64 64">
+        <ellipse cx="32" cy="35" rx="22" ry="16" fill="#F2D14A"/>
+        <path d="M53 30c4-1 7 1 7 4s-3 5-7 4zM11 30c-4-1-7 1-7 4s3 5 7 4z" fill="#F2D14A"/>
+        <ellipse cx="23" cy="28" rx="5" ry="3" transform="rotate(-25 23 28)" fill="#F9E88E" opacity=".9"/>
+        <path d="M33 16c6-7 15-7 18-1-7 3-12 4-18 1z" fill="#5A9C45"/>
+      </symbol>
+      <symbol id="z-kartoffel" viewBox="0 0 64 64">
+        <ellipse cx="32" cy="34" rx="23" ry="16" transform="rotate(-14 32 34)" fill="#CBA36E"/>
+        <circle cx="23" cy="29" r="2.2" fill="#A7824F"/><circle cx="39" cy="39" r="2.2" fill="#A7824F"/><circle cx="37" cy="26" r="1.7" fill="#A7824F"/><circle cx="27" cy="41" r="1.5" fill="#A7824F"/>
+        <ellipse cx="24" cy="24" rx="5" ry="2.5" transform="rotate(-20 24 24)" fill="#E2C293" opacity=".8"/>
+      </symbol>
+      <symbol id="z-feta" viewBox="0 0 64 64">
+        <path d="M12 22l16-8 24 6-16 8z" fill="#FFFFFF"/><path d="M12 22l24 6v22L12 44z" fill="#F1ECDF"/><path d="M36 28l16-8v22l-16 8z" fill="#E0D8C4"/>
+        <path d="M12 22l16-8 24 6-16 8-24-6zM36 28v22" fill="none" stroke="#D6CDB7" stroke-width="1.5" stroke-linejoin="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="site-head">
+    <div class="wrap head-row">
+      <a class="brand" href="index.html" aria-label="MealMyDay – Startseite">
+        <picture>
+          <source srcset="assets/schriftzug-hell.png" media="(prefers-color-scheme: dark)">
+          <img src="assets/schriftzug.png" alt="MealMyDay" width="720" height="302">
+        </picture>
+      </a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#so-gehts">So geht's</a></li>
+          <li><a href="#funktionen">Funktionen</a></li>
+          <li><a href="#tarife">Tarife</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <!-- bis zum Start „Warteliste“, danach wieder „App holen“ -->
+      <a class="btn btn-primary btn-sm head-cta" href="#app-holen">Warteliste</a>
+    </div>
+  </header>
+
+  <main id="inhalt">
+
+    <!-- ===== Einstieg mit schwebenden Zutaten ===== -->
+    <section class="hero" aria-labelledby="hero-titel">
+      <div class="ings" aria-hidden="true">
+        <span class="ing" style="--mx:2%;--my:6px;--s:40px;--dx:3%;--dy:9%;--ds:56px;--dur:6.1s;--del:-1.2s;--pd:0s;--r0:-5deg;--r1:4deg"><svg><use href="#z-ei"/></svg></span>
+        <span class="ing" style="--mx:44%;--my:58px;--s:44px;--dx:10%;--dy:27%;--ds:64px;--dur:7.2s;--del:-3.1s;--pd:.1s;--r0:4deg;--r1:-3deg"><svg><use href="#z-avocado"/></svg></span>
+        <span class="ing" style="--mx:86%;--my:8px;--s:40px;--dx:2%;--dy:46%;--ds:60px;--dur:6.6s;--del:-2.2s;--pd:.2s;--r0:-3deg;--r1:5deg"><svg><use href="#z-paprika"/></svg></span>
+        <span class="ing" style="--mx:31%;--my:4px;--s:38px;--dx:10%;--dy:64%;--ds:52px;--dur:5.8s;--del:-.6s;--pd:.15s;--r0:6deg;--r1:-4deg"><svg><use href="#z-tomate"/></svg></span>
+        <span class="ing" style="--mx:58%;--my:2px;--s:42px;--dx:3%;--dy:82%;--ds:64px;--dur:7.6s;--del:-4s;--pd:.25s;--r0:-4deg;--r1:3deg"><svg><use href="#z-brokkoli"/></svg></span>
+        <span class="ing" style="--mx:16%;--my:62px;--s:44px;--dx:19%;--dy:3%;--ds:60px;--dur:6.9s;--del:-2.6s;--pd:.3s;--r0:8deg;--r1:-6deg"><svg><use href="#z-banane"/></svg></span>
+        <span class="ing lg-only" style="--dx:31%;--dy:0%;--ds:52px;--dur:6.3s;--del:-1.8s;--pd:.35s;--r0:-3deg;--r1:3deg"><svg><use href="#z-linsen"/></svg></span>
+        <span class="ing lg-only" style="--dx:61%;--dy:1%;--ds:48px;--dur:5.6s;--del:-.9s;--pd:.4s;--r0:5deg;--r1:-5deg"><svg><use href="#z-zitrone"/></svg></span>
+        <span class="ing lg-only" style="--dx:73%;--dy:4%;--ds:60px;--dur:7s;--del:-3.5s;--pd:.45s;--r0:-6deg;--r1:4deg"><svg><use href="#z-brot"/></svg></span>
+        <span class="ing" style="--mx:71%;--my:60px;--s:44px;--dx:86%;--dy:10%;--ds:64px;--dur:6.4s;--del:-2s;--pd:.5s;--r0:3deg;--r1:-4deg"><svg><use href="#z-lachs"/></svg></span>
+        <span class="ing lg-only" style="--dx:93%;--dy:30%;--ds:56px;--dur:7.4s;--del:-1.1s;--pd:.55s;--r0:-7deg;--r1:5deg"><svg><use href="#z-haehnchen"/></svg></span>
+        <span class="ing lg-only" style="--dx:86%;--dy:50%;--ds:60px;--dur:6s;--del:-2.9s;--pd:.6s;--r0:4deg;--r1:-3deg"><svg><use href="#z-hafer"/></svg></span>
+        <span class="ing lg-only" style="--dx:94%;--dy:68%;--ds:56px;--dur:6.7s;--del:-.3s;--pd:.65s;--r0:-5deg;--r1:6deg"><svg><use href="#z-karotte"/></svg></span>
+        <span class="ing lg-only" style="--dx:86%;--dy:86%;--ds:52px;--dur:5.9s;--del:-3.8s;--pd:.7s;--r0:3deg;--r1:-3deg"><svg><use href="#z-beeren"/></svg></span>
+        <span class="ing lg-only" style="--dx:22%;--dy:90%;--ds:56px;--dur:7.1s;--del:-1.6s;--pd:.75s;--r0:-4deg;--r1:4deg"><svg><use href="#z-kaese"/></svg></span>
+        <span class="ing" style="--mx:88%;--my:70px;--s:36px;--dx:70%;--dy:90%;--ds:56px;--dur:6.5s;--del:-2.4s;--pd:.8s;--r0:6deg;--r1:-5deg"><svg><use href="#z-nuesse"/></svg></span>
+      </div>
+      <div class="wrap">
+        <div class="hero-inner">
+          <p class="eyebrow eyebrow-accent">
+            <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            Bald für Android und iPhone
+          </p>
+          <h1 id="hero-titel">Dein Mahlzeitenplan – aufs Gramm genau.</h1>
+          <p class="lead">MealMyDay erstellt dir Mahlzeitenpläne für 3 Tage oder bis zu vier Wochen – passend zu deinem Ziel, deiner Ernährungsweise und deinen Allergien. Mit Mengen aufs Gramm, Kalorien und Makros, kurzer Zubereitung und einer fertigen Einkaufsliste.</p>
+          <!-- Store-Knöpfe (siehe Hinweis im Abschnitt „App holen“ weiter unten) -->
+          <div class="store-btns">
+            <a class="store-btn is-soon" role="link" aria-disabled="true">
+              <svg class="ic-store" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5.5v21a1.5 1.5 0 0 0 2.3 1.3l17-10.5a1.5 1.5 0 0 0 0-2.6l-17-10.5A1.5 1.5 0 0 0 8 5.5z" fill="currentColor"/></svg>
+              <span><small>Bald verfügbar</small><b>Google Play</b></span>
+            </a>
+            <a class="store-btn is-soon" role="link" aria-disabled="true">
+              <svg class="ic-store" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="19" r="10" fill="currentColor"/><path d="M16 9V5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M17 9c1-4 4-5 7-5-1 4-4 5-7 5z" fill="currentColor"/></svg>
+              <span><small>Bald verfügbar</small><b>App Store</b></span>
+            </a>
+          </div>
+          <!-- Bis zum Start: Warteliste mit Gratis-Monat (Formular im Abschnitt „App holen“) -->
+          <p class="hero-wl">
+            <a href="#warteliste">
+              <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8c-1.5 0-4-.5-4-2.5A1.5 1.5 0 0 1 10 4c1.5 0 2 2.5 2 4zm0 0c1.5 0 4-.5 4-2.5A1.5 1.5 0 0 0 14 4c-1.5 0-2 2.5-2 4z"/></svg>
+              <span>Auf die Warteliste – 1&nbsp;Monat Premium gratis</span>
+            </a>
+          </p>
+          <ul class="hero-note">
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Kostenlos starten</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Nährwerte aus einer Lebensmittel-Datenbank</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Daten in der EU gespeichert</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Scroll-Geschichte: Zutaten → drei Teller → Einkaufsliste =====
+         Ohne JavaScript oder bei reduzierter Bewegung wird der Endzustand statisch gezeigt. -->
+    <section class="story" id="so-gehts" aria-labelledby="story-titel">
+      <div class="stage">
+        <div class="wrap">
+          <div class="stage-head">
+            <p class="eyebrow">Beispiel · So funktioniert's</p>
+            <h2 id="story-titel">Aus Zutaten wird dein Tag</h2>
+            <p class="stage-cap">Du sagst, wie du isst. MealMyDay stellt die Gerichte zusammen, rechnet alles aufs Gramm – und schreibt die Einkaufsliste gleich mit.</p>
+          </div>
+
+          <div class="scene">
+            <div class="plates-wrap">
+              <div class="plates">
+                <div class="plate">
+                  <div class="plate-disc" aria-hidden="true">
+                    <span class="slot" style="--sx:34%;--sy:35%" data-sym="z-hafer" data-item="hafer"><svg><use href="#z-hafer"/></svg></span>
+                    <span class="slot" style="--sx:67%;--sy:33%" data-sym="z-beeren" data-item="beeren"><svg><use href="#z-beeren"/></svg></span>
+                    <span class="slot" style="--sx:35%;--sy:67%" data-sym="z-nuesse" data-item="nuesse"><svg><use href="#z-nuesse"/></svg></span>
+                    <span class="slot" style="--sx:67%;--sy:68%" data-sym="z-banane" data-item="banane"><svg><use href="#z-banane"/></svg></span>
+                  </div>
+                  <h3>Frühstück</h3>
+                  <p class="plate-ings">Porridge mit Beeren, Nüssen und Banane</p>
+                  <p class="plate-kcal" aria-hidden="true"><span class="num" data-n="540">540</span> kcal</p>
+                  <div class="plate-bars" aria-hidden="true">
+                    <span class="pbar p" style="--w:.36"><i data-w=".36"></i></span>
+                    <span class="pbar c" style="--w:.86"><i data-w=".86"></i></span>
+                    <span class="pbar f" style="--w:.56"><i data-w=".56"></i></span>
+                  </div>
+                  <p class="visually-hidden">540 kcal, 16 g Eiweiß, 76 g Kohlenhydrate, 19 g Fett.</p>
+                </div>
+                <div class="plate">
+                  <div class="plate-disc" aria-hidden="true">
+                    <span class="slot" style="--sx:33%;--sy:34%" data-sym="z-linsen" data-item="linsen"><svg><use href="#z-linsen"/></svg></span>
+                    <span class="slot" style="--sx:67%;--sy:34%" data-sym="z-paprika" data-item="paprika"><svg><use href="#z-paprika"/></svg></span>
+                    <span class="slot" style="--sx:34%;--sy:68%" data-sym="z-brokkoli" data-item="brokkoli"><svg><use href="#z-brokkoli"/></svg></span>
+                    <span class="slot" style="--sx:66%;--sy:67%" data-sym="z-feta" data-item="feta"><svg><use href="#z-feta"/></svg></span>
+                  </div>
+                  <h3>Mittag</h3>
+                  <p class="plate-ings">Linsen-Bowl mit Paprika, Brokkoli und Feta</p>
+                  <p class="plate-kcal" aria-hidden="true"><span class="num" data-n="610">610</span> kcal</p>
+                  <div class="plate-bars" aria-hidden="true">
+                    <span class="pbar p" style="--w:.72"><i data-w=".72"></i></span>
+                    <span class="pbar c" style="--w:.7"><i data-w=".7"></i></span>
+                    <span class="pbar f" style="--w:.7"><i data-w=".7"></i></span>
+                  </div>
+                  <p class="visually-hidden">610 kcal, 35 g Eiweiß, 54 g Kohlenhydrate, 25 g Fett.</p>
+                </div>
+                <div class="plate">
+                  <div class="plate-disc" aria-hidden="true">
+                    <span class="slot" style="--sx:34%;--sy:34%" data-sym="z-lachs" data-item="lachs"><svg><use href="#z-lachs"/></svg></span>
+                    <span class="slot" style="--sx:67%;--sy:35%" data-sym="z-kartoffel" data-item="kartoffeln"><svg><use href="#z-kartoffel"/></svg></span>
+                    <span class="slot" style="--sx:34%;--sy:68%" data-sym="z-brokkoli" data-item="brokkoli"><svg><use href="#z-brokkoli"/></svg></span>
+                    <span class="slot" style="--sx:67%;--sy:67%" data-sym="z-zitrone" data-item="zitrone"><svg><use href="#z-zitrone"/></svg></span>
+                  </div>
+                  <h3>Abend</h3>
+                  <p class="plate-ings">Lachs mit Kartoffeln, Brokkoli und Zitrone</p>
+                  <p class="plate-kcal" aria-hidden="true"><span class="num" data-n="660">660</span> kcal</p>
+                  <div class="plate-bars" aria-hidden="true">
+                    <span class="pbar p" style="--w:.88"><i data-w=".88"></i></span>
+                    <span class="pbar c" style="--w:.64"><i data-w=".64"></i></span>
+                    <span class="pbar f" style="--w:.82"><i data-w=".82"></i></span>
+                  </div>
+                  <p class="visually-hidden">660 kcal, 44 g Eiweiß, 58 g Kohlenhydrate, 28 g Fett.</p>
+                </div>
+              </div>
+              <div class="balance">
+                <svg class="ring-svg" viewBox="0 0 80 80" aria-hidden="true"><circle class="ring-bg" cx="40" cy="40" r="34"/><circle class="ring-fg" cx="40" cy="40" r="34"/></svg>
+                <div>
+                  <p class="bal-num"><span class="num" data-n="1810" data-max="1850">1.810</span> von 1.850 kcal</p>
+                  <p class="bal-sub">Tagesbilanz – passt zu deinem Ziel.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="list-wrap">
+              <div class="list-card">
+                <h3><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h2l2.5 11h11L21 7H6.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Deine Einkaufsliste</h3>
+                <p class="visually-hidden">Beispiel: alle Zutaten des Tages zusammengezählt und nach Supermarkt-Bereichen sortiert.</p>
+                <div class="list-body">
+                <div class="list-group">
+                  <h4>Obst &amp; Gemüse</h4>
+                  <ul>
+                    <li class="row done" data-item="beeren"><span class="row-slot" aria-hidden="true"><svg><use href="#z-beeren"/></svg></span><span class="name">Beeren</span><span class="amt">120 g</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="banane"><span class="row-slot" aria-hidden="true"><svg><use href="#z-banane"/></svg></span><span class="name">Banane</span><span class="amt">1 Stück</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="paprika"><span class="row-slot" aria-hidden="true"><svg><use href="#z-paprika"/></svg></span><span class="name">Paprika</span><span class="amt">1 Stück</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="brokkoli"><span class="row-slot" aria-hidden="true"><svg><use href="#z-brokkoli"/></svg></span><span class="name">Brokkoli</span><span class="amt">1 Kopf</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="kartoffeln"><span class="row-slot" aria-hidden="true"><svg><use href="#z-kartoffel"/></svg></span><span class="name">Kartoffeln</span><span class="amt">250 g</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="zitrone"><span class="row-slot" aria-hidden="true"><svg><use href="#z-zitrone"/></svg></span><span class="name">Zitrone</span><span class="amt">1 Stück</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                  </ul>
+                </div>
+                <div class="list-group">
+                  <h4>Kühlregal</h4>
+                  <ul>
+                    <li class="row done" data-item="feta"><span class="row-slot" aria-hidden="true"><svg><use href="#z-feta"/></svg></span><span class="name">Feta</span><span class="amt">50 g</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="lachs"><span class="row-slot" aria-hidden="true"><svg><use href="#z-lachs"/></svg></span><span class="name">Lachsfilet</span><span class="amt">150 g</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                  </ul>
+                </div>
+                <div class="list-group">
+                  <h4>Vorrat</h4>
+                  <ul>
+                    <li class="row done" data-item="hafer"><span class="row-slot" aria-hidden="true"><svg><use href="#z-hafer"/></svg></span><span class="name">Haferflocken</span><span class="amt">70 g</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="linsen"><span class="row-slot" aria-hidden="true"><svg><use href="#z-linsen"/></svg></span><span class="name">Rote Linsen</span><span class="amt">80 g</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                    <li class="row done" data-item="nuesse"><span class="row-slot" aria-hidden="true"><svg><use href="#z-nuesse"/></svg></span><span class="name">Nüsse</span><span class="amt">20 g</span><span class="check" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg></span></li>
+                  </ul>
+                </div>
+                </div>
+                <p class="badge-done"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Alles im Wagen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Fliegende Zutaten (werden von animation.js erzeugt) -->
+        <div class="flyers" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ===== Funktionen: vier kompakte Karten, jede mit einer kleinen Vorführung (class="demo") =====
+         Alle Fakten stehen als Text. Mit JavaScript: Kalorien zählen hoch (.cnt), Schleifen laufen nur, solange sichtbar (.live). -->
+    <section class="section" id="funktionen" aria-labelledby="funktionen-titel">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="funktionen-titel">Was MealMyDay kann</h2>
+          <p>Du sagst, wie du isst und was du erreichen willst. MealMyDay macht daraus einen Plan, den du wirklich kochen kannst.</p>
+        </div>
+        <div class="grid grid-fx">
+          <article class="card fx reveal" style="--i:0">
+            <div class="fx-head">
+              <div class="tile tile-accent"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+              <h3>Passt zu dir</h3>
+            </div>
+            <div class="demo pick live">
+              <p class="pick-row"><span class="lab">Ziel</span><span class="chip" style="--k:0">Abnehmen</span><span class="chip" style="--k:1">Gewicht halten</span><span class="chip" style="--k:2">Muskelaufbau</span></p>
+              <p class="pick-row"><span class="lab">Ernährungsweise</span><span class="chip" style="--k:3">Alles drin</span><span class="chip" style="--k:4">Pescetarisch</span><span class="chip" style="--k:5">Vegetarisch</span><span class="chip" style="--k:6">Vegan</span><span class="chip" style="--k:7">Mediterran</span><span class="chip" style="--k:8">Paleo</span><span class="chip" style="--k:9">Keto</span><span class="chip" style="--k:10">Halal</span></p>
+              <p class="pick-row"><span class="lab">Zeitraum</span><span class="chip" style="--k:11">3 Tage</span><span class="chip" style="--k:12">1 Woche</span><span class="chip" style="--k:13">bis 4 Wochen</span></p>
+            </div>
+            <p>Kalorienziel und Makros richten sich nach deinem Ziel, die Gerichte nach deiner Ernährungsweise – für 3 Tage zum Ausprobieren oder bis zu vier Wochen im Voraus.</p>
+          </article>
+          <article class="card fx reveal" style="--i:1">
+            <div class="fx-head">
+              <div class="tile tile-carb"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="12" width="16" height="8" rx="2"/><path d="M8 12V8a4 4 0 0 1 8 0v4M12 16h.01"/></svg></div>
+              <h3>Aufs Gramm berechnet</h3>
+            </div>
+            <div class="demo dish" aria-hidden="true">
+              <p class="dish-top"><b>Linsen-Bowl</b><span class="kcal"><span class="cnt" data-n="610">610</span> kcal</span></p>
+              <p class="dish-ings">Rote Linsen 85 g · Paprika 1 Stück · Brokkoli 145 g · Feta 40 g · Olivenöl 12 g</p>
+              <div class="mb">
+                <span>Eiweiß</span><span class="pbar p" style="--w:.6"><i></i></span><b>35 g</b>
+                <span>Kohlenhydrate</span><span class="pbar c" style="--w:.8"><i></i></span><b>54 g</b>
+                <span>Fett</span><span class="pbar f" style="--w:.5"><i></i></span><b>25 g</b>
+              </div>
+            </div>
+            <p>Jedes Gericht mit genauen Mengen, Kalorien und Makros – Eiweiß, Kohlenhydrate, Fett – und einer kurzen Zubereitung. Die Nährwerte kommen aus einer Lebensmittel-Datenbank und werden von der App berechnet, nie von einer KI geschätzt.</p>
+          </article>
+          <article class="card fx reveal" style="--i:2">
+            <div class="fx-head">
+              <div class="tile tile-prot"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              <h3>Sicher bei Allergien</h3>
+            </div>
+            <div class="demo guard" aria-hidden="true">
+              <p class="lab">Du schließt aus</p>
+              <span class="no"><svg><use href="#z-nuesse"/></svg>Nüsse<i></i></span>
+              <span class="no"><svg><use href="#z-brot"/></svg>Gluten<i></i></span>
+              <span class="no"><svg><use href="#z-kaese"/></svg>Laktose<i></i></span>
+              <span class="ok"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Nicht im Plan</span>
+            </div>
+            <p>Die 14 EU-Hauptallergene plus Laktose lassen sich ausschließen. Zutaten mit dem Allergen kommen nicht in deinen Plan.</p>
+          </article>
+          <article class="card fx reveal" style="--i:3">
+            <div class="fx-head">
+              <div class="tile tile-green"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h2l2.5 11h11L21 7H6.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></div>
+              <h3>Alltagstauglich</h3>
+            </div>
+            <div class="demo swap live" aria-hidden="true">
+              <span class="sw-a"><svg><use href="#z-lachs"/></svg><span>Lachs mit Kartoffeln<small>660 kcal</small></span></span>
+              <span class="sw-b"><svg><use href="#z-haehnchen"/></svg><span>Hähnchen mit Gemüse<small>640 kcal</small></span></span>
+              <span class="sw-btn"><svg class="ic" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></span>
+              <span class="sw-fav"><svg class="ic" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg></span>
+            </div>
+            <ul class="fx-list">
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Einkaufsliste</b> – zusammengezählt und nach Supermarkt-Bereichen sortiert, bei längeren Plänen nach Wochen filterbar.</span></li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Gerichte tauschen</b> – kostenlos fünfmal pro Plan, mit Plus und Premium unbegrenzt.</span></li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Favoriten und gespeicherte Pläne</b> – dein aktueller und dein vorheriger Plan bleiben gespeichert, mit Plus und Premium.</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Probier's aus: Beispiel-Planer (beispielplaner.js) =====
+         Rechnet wie die App im Browser; die Beispieltage kommen aus beispiele.json (geladen erst beim Hereinscrollen).
+         Die Eckdaten stehen als Text (data-n zählt per animation.js hoch, data-fact wird aus der Datei aktualisiert).
+         Ohne JavaScript bleiben Formular und Eckdaten sichtbar, statt des Ergebnisses steht der Hinweis im <noscript>. -->
+    <section class="section" id="ausprobieren" aria-labelledby="ausprobieren-titel">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="ausprobieren-titel">Probier's aus</h2>
+          <p>Stell ein, wie du isst – so wie in der App unter „Neuer Plan“ – und sieh dir einen Beispieltag an.</p>
+        </div>
+        <ul class="facts reveal" aria-label="MealMyDay in Zahlen">
+          <li><b>über <span class="cnt" data-fact="gerichte" data-n="800">800</span></b><span>Gerichte</span></li>
+          <li><b><span class="cnt" data-fact="lebensmittel" data-n="144">144</span></b><span>Lebensmittel mit geprüften Nährwerten</span></li>
+          <li><b><span class="cnt" data-fact="ernaehrungsweisen" data-n="8">8</span></b><span>Ernährungsweisen</span></li>
+          <li><b><span class="cnt" data-fact="allergene" data-n="14">14</span></b><span>Allergene + Laktose ausschließbar</span></li>
+        </ul>
+        <div class="try">
+          <form class="bp-form" id="bp-form" novalidate aria-label="Einstellungen für den Beispieltag">
+            <fieldset>
+              <legend class="lab">Ziel</legend>
+              <div class="seg">
+                <label><input type="radio" name="ziel" value="ab"><span>Abnehmen</span></label>
+                <label><input type="radio" name="ziel" value="halten" checked><span>Gewicht halten</span></label>
+                <label><input type="radio" name="ziel" value="auf"><span>Muskelaufbau</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend class="lab">Ernährungsweise</legend>
+              <div class="seg">
+                <label><input type="radio" name="diet" value="alles" checked><span>Alles drin</span></label>
+                <label><input type="radio" name="diet" value="pesce"><span>Pescetarisch</span></label>
+                <label><input type="radio" name="diet" value="vegetarisch"><span>Vegetarisch</span></label>
+                <label><input type="radio" name="diet" value="vegan"><span>Vegan</span></label>
+                <label><input type="radio" name="diet" value="mediterran"><span>Mediterran</span></label>
+                <label><input type="radio" name="diet" value="paleo"><span>Paleo</span></label>
+                <label><input type="radio" name="diet" value="keto"><span>Keto</span></label>
+                <label><input type="radio" name="diet" value="halal"><span>Halal</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend class="lab">Mahlzeiten pro Tag</legend>
+              <div class="seg">
+                <label><input type="radio" name="mahlzeiten" value="3" checked><span>3 Mahlzeiten</span></label>
+                <label><input type="radio" name="mahlzeiten" value="4"><span>4 Mahlzeiten</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend class="lab">Geschlecht</legend>
+              <div class="seg">
+                <label><input type="radio" name="sex" value="m" checked><span>Mann</span></label>
+                <label><input type="radio" name="sex" value="f"><span>Frau</span></label>
+              </div>
+            </fieldset>
+            <div class="bp-nums">
+              <p><label class="lab" for="bp-alter">Alter</label><input id="bp-alter" name="alter" type="text" inputmode="numeric" value="30" maxlength="3" autocomplete="off"></p>
+              <p><label class="lab" for="bp-groesse">Größe in cm</label><input id="bp-groesse" name="groesse" type="text" inputmode="numeric" value="178" maxlength="3" autocomplete="off"></p>
+              <p><label class="lab" for="bp-gewicht">Gewicht in kg</label><input id="bp-gewicht" name="gewicht" type="text" inputmode="decimal" value="78" maxlength="5" autocomplete="off"></p>
+            </div>
+            <p>
+              <label class="lab" for="bp-akt">Aktivität</label>
+              <select id="bp-akt" name="akt">
+                <option value="1.2">Kaum aktiv (Bürojob, wenig Sport)</option>
+                <option value="1.375">Leicht aktiv (1–2× Sport pro Woche)</option>
+                <option value="1.55" selected>Mäßig aktiv (3–4× Sport pro Woche)</option>
+                <option value="1.725">Sehr aktiv (täglich Sport oder körperliche Arbeit)</option>
+              </select>
+            </p>
+            <p class="bp-hint">Allergien und weitere Filter gibt's in der App.</p>
+          </form>
+          <div class="try-side">
+            <div class="bp-out" id="bp-out" aria-live="polite">
+              <noscript><p class="bp-msg">Für den Beispiel-Planer bitte JavaScript aktivieren.</p></noscript>
+            </div>
+            <p class="bp-foot">Beispiel – in der App wird jeder Plan genau für dich berechnet, mit Zubereitung, Einkaufsliste, Allergie-Filtern und bis zu 4 Wochen im Voraus.</p>
+            <p class="bp-cta"><a class="btn btn-primary" href="#app-holen">Auf die Warteliste</a></p>
+            <p class="bp-hint">Deine Angaben bleiben in deinem Browser – nichts wird gesendet oder gespeichert. Ersetzt keine ärztliche oder Ernährungsberatung.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Grundsatz: KI erfindet, App rechnet ===== -->
+    <section class="section" id="grundsatz" aria-labelledby="grundsatz-titel">
+      <div class="wrap">
+        <div class="principle reveal">
+          <div class="section-head">
+            <h2 id="grundsatz-titel">Die KI erfindet, die App rechnet</h2>
+            <p>Gute Gerichte brauchen Ideen – Nährwerte brauchen Genauigkeit. Deshalb trennen wir beides sauber.</p>
+          </div>
+          <div class="principle-cols">
+            <div class="principle-col">
+              <div class="tile tile-accent"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></div>
+              <h3>Gerichte: mit KI entwickelt</h3>
+              <p>Die Gerichte in MealMyDay werden mit Hilfe von KI entwickelt und in unserer Rezept-Datenbank gespeichert – mit Zutaten, Mengen und Zubereitung.</p>
+            </div>
+            <div class="principle-col">
+              <div class="tile tile-fat"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01"/></svg></div>
+              <h3>Nährwerte: von der App berechnet</h3>
+              <p>Kalorien, Eiweiß, Kohlenhydrate und Fett kommen immer aus einer Lebensmittel-Datenbank und werden von der App berechnet – für jede Zutat und jede Menge. Die KI schätzt hier nichts.</p>
+            </div>
+          </div>
+          <div class="source">
+            <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h13"/><path d="M8 7h7"/></svg>
+            <p><strong>Datenquelle:</strong> Die Nährwerte stammen aus dem <a href="https://www.blsdb.de/" rel="noopener">Bundeslebensmittelschlüssel (BLS) 4.0</a> des Max Rubner-Instituts, Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" rel="noopener">CC BY 4.0</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Sicherheit ===== -->
+    <section class="section safety" id="sicherheit" aria-labelledby="sicherheit-titel">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="sicherheit-titel">Sicher und ehrlich</h2>
+          <p>Ein paar Dinge, die uns wichtig sind – und die du wissen solltest.</p>
+        </div>
+        <div class="grid grid-2">
+          <article class="card reveal" style="--i:0">
+            <div class="tile tile-green"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></div>
+            <div>
+              <h3>Nie unter 1.200 kcal</h3>
+              <p>MealMyDay plant nie unter 1.200 kcal pro Tag – auch nicht beim Abnehmen.</p>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:1">
+            <div class="tile tile-accent"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
+            <div>
+              <h3>Keine ärztliche Beratung</h3>
+              <p>MealMyDay ersetzt keine ärztliche oder Ernährungsberatung. Bei gesundheitlichen Fragen sprich bitte mit deiner Ärztin, deinem Arzt oder einer Ernährungsfachkraft.</p>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:0">
+            <div class="tile tile-prot"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div>
+            <div>
+              <h3>Bei Allergien: Etikett prüfen</h3>
+              <p>Der Allergie-Filter hält Zutaten mit dem Allergen aus deinem Plan. Prüfe trotzdem immer die Zutatenliste der Produkte, die du kaufst.</p>
+            </div>
+          </article>
+          <article class="card reveal" style="--i:1">
+            <div class="tile tile-fat"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+            <div>
+              <h3>Deine Daten bleiben deine</h3>
+              <p>Gespeichert wird auf Servern in Frankfurt (EU). Gesundheitsdaten wie Gewicht oder Allergien landen nur mit deiner ausdrücklichen Einwilligung im Konto. Dein Konto kannst du jederzeit in der App löschen. <a href="datenschutz.html">Mehr dazu in der Datenschutzerklärung</a>.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Vergleich: MealMyDay gegenüber einer typischen Kalorien-Zähl-App =====
+         Sachlich und ohne Namen anderer Apps (§ 6 UWG): verglichen wird nur die Arbeitsweise, die für jede Zähl-App
+         ihrem Zweck nach gilt. Echte Tabelle; auf dem Handy wird jede Zeile ein Kärtchen (Spaltenname aus data-label).
+         Die role-Attribute halten die Tabellen-Semantik, auch wenn das CSS die Zellen als Blöcke anzeigt. -->
+    <section class="section" id="vergleich" aria-labelledby="vergleich-titel">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="vergleich-titel">Planen statt zählen</h2>
+          <p>Eine Kalorien-Zähl-App schaut zurück, MealMyDay plant voraus – mit Mengen, Nährwerten und Einkaufsliste.</p>
+        </div>
+        <table class="cmp reveal" role="table">
+          <caption class="visually-hidden">MealMyDay und eine typische Kalorien-Zähl-App im Vergleich</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th role="columnheader" scope="col"><span class="visually-hidden">Thema</span></th>
+              <!-- Spaltenkopf als Schriftzug; der Name „MealMyDay“ kommt aus dem alt-Text des Bildes -->
+              <th role="columnheader" scope="col" class="cmp-us"><picture class="wordmark"><source srcset="assets/schriftzug-hell.png" media="(prefers-color-scheme: dark)"><img src="assets/schriftzug.png" alt="MealMyDay" width="720" height="302"></picture></th>
+              <th role="columnheader" scope="col">Typische Kalorien-Zähl-App</th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            <tr role="row">
+              <th role="rowheader" scope="row">Was du tust</th>
+              <td role="cell" class="cmp-us" data-label="MealMyDay"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Ziel und Vorlieben angeben – den Plan stellt die App zusammen.</td>
+              <td role="cell" data-label="Kalorien-Zähl-App"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>Jede Mahlzeit selbst suchen und eintragen.</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row">Was du bekommst</th>
+              <td role="cell" class="cmp-us" data-label="MealMyDay"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Einen fertigen Plan für 3 Tage bis 4 Wochen, mit Mengen aufs Gramm.</td>
+              <td role="cell" data-label="Kalorien-Zähl-App"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>Eine Übersicht über das, was du schon gegessen hast.</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row">Einkaufen</th>
+              <td role="cell" class="cmp-us" data-label="MealMyDay"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Einkaufsliste, zusammengezählt und nach Supermarkt-Bereichen sortiert.</td>
+              <td role="cell" data-label="Kalorien-Zähl-App"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>Planen und Einkaufen bleibt bei dir.</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row">Allergien</th>
+              <td role="cell" class="cmp-us" data-label="MealMyDay"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>14 EU-Hauptallergene und Laktose werden schon beim Planen ausgeschlossen.</td>
+              <td role="cell" data-label="Kalorien-Zähl-App"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>Du achtest selbst darauf, was du einträgst.</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row">Nährwerte</th>
+              <td role="cell" class="cmp-us" data-label="MealMyDay"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Aus dem Bundeslebensmittelschlüssel (BLS 4.0), von der App berechnet – nie von einer KI geschätzt.</td>
+              <td role="cell" data-label="Kalorien-Zähl-App"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>Aus der Datenbank der jeweiligen App.</td>
+            </tr>
+            <tr role="row">
+              <th role="rowheader" scope="row">Abwechslung</th>
+              <td role="cell" class="cmp-us" data-label="MealMyDay"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Gericht passt nicht? Mit einem Fingertipp tauschen – passend zu deinem Ziel.</td>
+              <td role="cell" data-label="Kalorien-Zähl-App"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>Die Alternative suchst du dir selbst aus.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="cmp-note reveal">Kalorien zählen und Pläne erstellen sind zwei verschiedene Ansätze – MealMyDay nimmt dir das Planen ab.</p>
+      </div>
+    </section>
+
+    <!-- ===== Tarife ===== -->
+    <section class="section" id="tarife" aria-labelledby="tarife-titel">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="tarife-titel">Tarife</h2>
+          <p>Starte kostenlos. Wenn du mehr planen möchtest, gibt es Plus und Premium – monatlich oder günstiger im Jahr.</p>
+        </div>
+        <div class="plans">
+          <article class="plan reveal" style="--i:0" aria-labelledby="plan-free">
+            <h3 id="plan-free">Kostenlos</h3>
+            <p class="price"><strong>0 €</strong></p>
+            <p class="price-alt">ohne Abo</p>
+            <ul class="feat">
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>1 Plan für 3 Tage pro Woche</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>5× Gerichte tauschen pro Plan</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Alle Filter, Allergien &amp; Einkaufsliste</li>
+            </ul>
+          </article>
+          <article class="plan reveal" style="--i:1" aria-labelledby="plan-plus">
+            <h3 id="plan-plus">Plus</h3>
+            <p class="price"><strong>4,99 €</strong><span>pro Monat</span></p>
+            <p class="price-alt">oder <b>34,99 € pro Jahr</b> (≈ 2,92 € im Monat)</p>
+            <ul class="feat">
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>8 Wochenpläne pro Monat</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Eine ganze Woche planen, mit Einkaufsliste</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Gerichte unbegrenzt tauschen</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Favoriten &amp; gespeicherte Pläne</li>
+            </ul>
+          </article>
+          <article class="plan plan-featured reveal live" style="--i:2" aria-labelledby="plan-premium">
+            <span class="plan-badge">7 Tage kostenlos testen</span>
+            <h3 id="plan-premium">Premium</h3>
+            <p class="price"><strong>6,99 €</strong><span>pro Monat</span></p>
+            <p class="price-alt">oder <b>49,99 € pro Jahr</b> (≈ 4,17 € im Monat)</p>
+            <ul class="feat">
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>10 Pläne pro Monat</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Bis zu 4 Wochen im Voraus planen</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Einkaufsliste nach Wochen</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Gerichte unbegrenzt tauschen</li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Favoriten &amp; gespeicherte Pläne</li>
+            </ul>
+          </article>
+        </div>
+        <p class="plans-note reveal">Für einen Plan brauchst du ein kostenloses Konto. Bezahlt wird über Google Play bzw. den App Store.</p>
+      </div>
+    </section>
+
+    <!-- ===== Häufige Fragen: <details>/<summary>, ohne JavaScript auf- und zuklappbar ===== -->
+    <section class="section" id="fragen" aria-labelledby="fragen-titel">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 id="fragen-titel">Häufige Fragen</h2>
+          <p>Kurz beantwortet. Noch etwas offen? <a href="#kontakt">Schreib uns</a>.</p>
+        </div>
+        <div class="faq">
+          <details class="faq-item reveal" style="--i:0">
+            <summary>Wie funktioniert MealMyDay?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p>Du gibst dein Ziel (Abnehmen, Gewicht halten, Muskelaufbau), deine Ernährungsweise, Allergien und Körperdaten an. Daraus berechnet die App dein Kalorienziel und deine Makros und stellt passende Gerichte mit genauen Mengen zusammen – die Einkaufsliste gleich dazu. Die Gerichte entwickelt eine KI; die Nährwerte berechnet die App aus dem Bundeslebensmittelschlüssel – von der KI geschätzt wird nichts.</p>
+          </details>
+          <details class="faq-item reveal" style="--i:1">
+            <summary>Wie zuverlässig sind die Allergie-Filter?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p>Die 14 EU-Hauptallergene und Laktose lassen sich ausschließen – Zutaten mit einem ausgeschlossenen Allergen kommen nie in deinen Plan. Prüfe trotzdem immer das Etikett: Rezepturen der Hersteller ändern sich, und Spuren kann die App nicht kennen.</p>
+          </details>
+          <details class="faq-item reveal" style="--i:2">
+            <summary>Kann ich MealMyDay kostenlos nutzen?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p>Ja. Mit einem kostenlosen Konto erstellst du 1 Plan pro Woche für 3 Tage und kannst Gerichte 5× pro Plan tauschen. Mit Plus planst du eine ganze Woche, mit Premium bis zu 4 Wochen – Premium kannst du 7 Tage kostenlos testen. Abos kündigst du jederzeit über Google Play bzw. den App Store.</p>
+          </details>
+          <details class="faq-item reveal" style="--i:3">
+            <summary>Wo liegen meine Daten?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p>Auf Servern in der EU (Frankfurt). Gesundheitsangaben wie Gewicht oder Allergien speichert MealMyDay nur mit deiner ausdrücklichen Einwilligung. In der App kannst du deine Daten jederzeit exportieren oder dein Konto komplett löschen.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== App holen + Kontakt =====
+         Store-Knöpfe freischalten, sobald die App live ist (hier und oben im Hero):
+         1) href eintragen – Google Play: https://play.google.com/store/apps/details?id=de.jilacreatives.mealmyday
+            App Store: Adresse folgt, sobald die App dort angenommen ist
+         2) class "is-soon" und aria-disabled="true" entfernen
+         3) <small>Bald verfügbar</small> z. B. in <small>Jetzt laden bei</small> ändern
+         Erst dann dürfen auch die offiziellen Store-Abzeichen eingesetzt werden. -->
+    <section class="section" id="app-holen" aria-labelledby="app-titel">
+      <div class="wrap">
+        <div class="getapp reveal">
+          <div class="getapp-text">
+            <p class="eyebrow eyebrow-accent">
+              <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+              Bald verfügbar
+            </p>
+            <!-- „MealMyDay“ als Schriftzug, auf der Grundlinie von „Hol dir“ (Stile unter .wordmark) -->
+            <h2 id="app-titel">Hol dir <picture class="wordmark"><source srcset="assets/schriftzug-hell.png" media="(prefers-color-scheme: dark)"><img src="assets/schriftzug.png" alt="MealMyDay" width="720" height="302"></picture></h2>
+            <p>MealMyDay kommt als App für Android und iPhone. Sobald sie in den Stores ist, findest du hier die Links – bis dahin stehen die Knöpfe auf „Bald verfügbar“.</p>
+            <div class="store-btns">
+              <a class="store-btn is-soon" role="link" aria-disabled="true">
+                <svg class="ic-store" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5.5v21a1.5 1.5 0 0 0 2.3 1.3l17-10.5a1.5 1.5 0 0 0 0-2.6l-17-10.5A1.5 1.5 0 0 0 8 5.5z" fill="currentColor"/></svg>
+                <span><small>Bald verfügbar</small><b>Google Play</b></span>
+              </a>
+              <a class="store-btn is-soon" role="link" aria-disabled="true">
+                <svg class="ic-store" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="19" r="10" fill="currentColor"/><path d="M16 9V5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M17 9c1-4 4-5 7-5-1 4-4 5-7 5z" fill="currentColor"/></svg>
+                <span><small>Bald verfügbar</small><b>App Store</b></span>
+              </a>
+            </div>
+            <p>Die App ist kostenlos. Plus und Premium buchst du als Abo über Google Play bzw. den App Store.</p>
+          </div>
+
+          <!-- Warteliste bis zum Start: E-Mail eintragen, Bestätigung per Link (Double-Opt-in), 1 Monat Premium gratis.
+               Das Formular schickt warteliste.js an die Edge Function bei Supabase; der Einwilligungstext unten ist
+               Fassung „2026-10-12“ – der Server speichert denselben Wortlaut als Nachweis. Bei Änderungen am Text
+               also die Fassung in warteliste.js und auf dem Server mit anpassen. -->
+          <div class="waitlist">
+            <p class="waitlist-badge">
+              <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8c-1.5 0-4-.5-4-2.5A1.5 1.5 0 0 1 10 4c1.5 0 2 2.5 2 4zm0 0c1.5 0 4-.5 4-2.5A1.5 1.5 0 0 0 14 4c-1.5 0-2 2.5-2 4z"/></svg>
+              1&nbsp;Monat Premium gratis
+            </p>
+            <h3 id="warteliste-titel">Sei von Anfang an dabei</h3>
+            <p>Trag dich jetzt ein: Zum Start der App bekommst du eine E-Mail mit deinem Gratis-Monat Premium – und bist unter den Ersten, die MealMyDay ausprobieren.</p>
+            <form id="warteliste" class="wl-form" novalidate aria-labelledby="warteliste-titel">
+              <div class="field">
+                <label for="wl-email">Deine E-Mail-Adresse</label>
+                <input id="wl-email" type="email" name="email" autocomplete="email" required maxlength="254" inputmode="email" spellcheck="false" aria-describedby="wl-email-fehler">
+                <p class="field-error" id="wl-email-fehler" hidden></p>
+              </div>
+              <!-- Lockfeld gegen Bots: für Menschen und Screenreader unsichtbar, bleibt leer -->
+              <div class="hp" aria-hidden="true">
+                <label for="wl-website">Website</label>
+                <input id="wl-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+              <div class="field field-check">
+                <input id="wl-einwilligung" type="checkbox" name="einwilligung" required aria-describedby="wl-einwilligung-fehler">
+                <label for="wl-einwilligung">Ja, ich möchte auf die Warteliste. MealMyDay darf mir zum Start der App eine E-Mail mit meinem Gratis-Monat Premium schicken und mich danach gelegentlich per E-Mail über Neuigkeiten und Angebote zu MealMyDay informieren. Diese Einwilligung kann ich jederzeit widerrufen, zum Beispiel über den Abmelde-Link in jeder E-Mail.</label>
+                <p class="field-error" id="wl-einwilligung-fehler" hidden></p>
+              </div>
+              <p class="wl-ds"><a href="datenschutz.html#warteliste">Mehr dazu in der Datenschutzerklärung</a></p>
+              <button type="submit" class="btn btn-primary">Auf die Warteliste</button>
+              <p class="wl-hint">Du bekommst gleich eine E-Mail – erst nach deiner Bestätigung stehst du auf der Liste.</p>
+            </form>
+            <p class="wl-status" id="warteliste-status" role="status" aria-live="polite" tabindex="-1"></p>
+            <details class="wl-details">
+              <summary>So funktioniert der Gratis-Monat</summary>
+              <p>Der Gratis-Monat gilt für alle, die sich vor dem Start der App eintragen und ihre E-Mail-Adresse bestätigen. Einlösen kannst du ihn bis 3 Monate nach dem Start, indem du dich in der App mit derselben E-Mail-Adresse registrierst. Der Monat beginnt mit der Registrierung und endet von selbst – kein Abo, nichts zu kündigen.</p>
+            </details>
+          </div>
+
+          <div class="contact-box" id="kontakt">
+            <h3>Kontakt</h3>
+            <p>Fragen, Wünsche, Fehler gefunden? Schreib uns:</p>
+            <a class="mail" href="mailto:support@mealmyday.app">
+              <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/></svg>
+              support@mealmyday.app
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="foot-top">
+        <a class="brand" href="index.html" aria-label="MealMyDay – Startseite">
+          <picture>
+            <source srcset="assets/schriftzug-hell.png" media="(prefers-color-scheme: dark)">
+            <img src="assets/schriftzug.png" alt="MealMyDay" width="720" height="302">
+          </picture>
+        </a>
+        <nav class="foot-nav" aria-label="Rechtliches und Kontakt">
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+            <li><a href="konto-loeschen.html">Konto löschen</a></li>
+            <li><a href="mailto:support@mealmyday.app">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="foot-note">Nährwertdaten: Bundeslebensmittelschlüssel (BLS) 4.0, Max Rubner-Institut, Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" rel="noopener">CC BY 4.0</a>. Schriften Fredoka und Nunito (SIL Open Font License), lokal eingebunden. Beispielgerichte und Zahlen auf dieser Seite dienen der Veranschaulichung.</p>
+      <p class="foot-copy">© 2026 Jim Lamadrid León</p>
+    </div>
+  </footer>
+</body>
+</html>

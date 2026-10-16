@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Warteliste – MealMyDay</title>
+  <meta name="description" content="Anmeldung zur MealMyDay-Warteliste bestätigen oder von der Warteliste abmelden.">
+  <!-- Ziel der Links aus den Warteliste-E-Mails – nicht für Suchmaschinen, nicht in der sitemap.xml -->
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121915" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site.js" defer></script>
+  <script src="warteliste.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+  <header class="site-head">
+    <div class="wrap head-row">
+      <a class="brand" href="index.html" aria-label="MealMyDay – Startseite">
+        <picture>
+          <source srcset="assets/schriftzug-hell.png" media="(prefers-color-scheme: dark)">
+          <img src="assets/schriftzug.png" alt="MealMyDay" width="720" height="302">
+        </picture>
+      </a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="index.html#so-gehts">So geht's</a></li>
+          <li><a href="index.html#funktionen">Funktionen</a></li>
+          <li><a href="index.html#tarife">Tarife</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <!-- bis zum Start „Warteliste“, danach wieder „App holen“ -->
+      <a class="btn btn-primary btn-sm head-cta" href="index.html#app-holen">Warteliste</a>
+    </div>
+  </header>
+
+  <!-- Drei Ansichten, warteliste.js blendet die passende ein:
+       ?t=TOKEN → „Anmeldung bestätigen“, ?abmelden=TOKEN → „Von der Warteliste abmelden“, sonst der Hinweis.
+       Ohne JavaScript bleibt der Hinweis sichtbar. -->
+  <main id="inhalt" class="page">
+    <div class="wrap">
+      <div id="warteliste-seite">
+
+        <section class="wl-ansicht" id="ansicht-hinweis" data-titel="Warteliste">
+          <div class="page-head">
+            <h1>Warteliste</h1>
+            <p class="lead">Hier landest du über den Link in unserer E-Mail.</p>
+          </div>
+          <div class="prose">
+            <noscript><p>Zum Bestätigen und Abmelden muss JavaScript eingeschaltet sein.</p></noscript>
+            <p class="btn-row"><a class="btn btn-ghost" href="index.html#warteliste">Zur Warteliste auf der Startseite</a></p>
+          </div>
+        </section>
+
+        <section class="wl-ansicht" id="ansicht-bestaetigen" data-titel="Anmeldung bestätigen" hidden>
+          <div class="page-head">
+            <h1>Anmeldung bestätigen</h1>
+            <p class="lead">Ein Klick, und du stehst auf der Warteliste – mit deinem Gratis-Monat Premium zum Start der App.</p>
+          </div>
+          <div class="prose">
+            <p class="wl-aktion btn-row"><button type="button" class="btn btn-primary">Ja, ich bin dabei</button></p>
+            <p class="wl-status" role="status" aria-live="polite" tabindex="-1"></p>
+            <p class="wl-weiter" hidden><a href="index.html">Zur Startseite</a></p>
+          </div>
+        </section>
+
+        <section class="wl-ansicht" id="ansicht-abmelden" data-titel="Von der Warteliste abmelden" hidden>
+          <div class="page-head">
+            <h1>Von der Warteliste abmelden</h1>
+            <p class="lead">Schade, dass du gehst. Mit einem Klick löschen wir deine E-Mail-Adresse von der Warteliste – danach bekommst du keine E-Mails mehr von uns.</p>
+          </div>
+          <div class="prose">
+            <p class="wl-aktion btn-row"><button type="button" class="btn btn-primary">Abmelden</button></p>
+            <p class="wl-status" role="status" aria-live="polite" tabindex="-1"></p>
+            <p class="wl-weiter" hidden><a href="index.html">Zur Startseite</a></p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <div class="foot-top">
+        <a class="brand" href="index.html" aria-label="MealMyDay – Startseite">
+          <picture>
+            <source srcset="assets/schriftzug-hell.png" media="(prefers-color-scheme: dark)">
+            <img src="assets/schriftzug.png" alt="MealMyDay" width="720" height="302">
+          </picture>
+        </a>
+        <nav class="foot-nav" aria-label="Rechtliches und Kontakt">
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+            <li><a href="konto-loeschen.html">Konto löschen</a></li>
+            <li><a href="mailto:support@mealmyday.app">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="foot-note">Nährwertdaten: Bundeslebensmittelschlüssel (BLS) 4.0, Max Rubner-Institut, Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de" rel="noopener">CC BY 4.0</a>. Schriften Fredoka und Nunito (SIL Open Font License), lokal eingebunden.</p>
+      <p class="foot-copy">© 2026 Jim Lamadrid León</p>
+    </div>
+  </footer>
+</body>
+</html>
