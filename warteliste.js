@@ -1,6 +1,6 @@
 /* MealMyDay – Warteliste (Startseite und warteliste.html). Reines JavaScript, keine Bibliotheken.
    Spricht mit der Edge Function bei Supabase – die einzige Anfrage dieser Website an einen fremden Server:
-   - Startseite, Formular #warteliste: E-Mail-Adresse eintragen (Aktion „eintragen“, mit der Herkunft aus dem Link)
+   - Startseite, Formulare #warteliste-oben und #warteliste: E-Mail-Adresse eintragen (Aktion „eintragen“, mit der Herkunft aus dem Link)
    - warteliste.html: Anmeldung bestätigen bzw. abmelden über die Links aus den E-Mails (Aktionen „bestaetigen“, „abmelden“)
    Antwort des Servers ist immer JSON: Erfolg { ok: true, meldung: "…" }, Fehler (HTTP 4xx/5xx) { fehler: "…" }.
    Die Texte in meldung/fehler kommen vom Server und werden genau so angezeigt. */
@@ -62,17 +62,26 @@
     el.focus();
   }
 
-  /* ---- Startseite: Formular zum Eintragen ---- */
-  function startFormular() {
-    var form = document.getElementById('warteliste');
-    if (!form) return;
+  /* ---- Startseite: Formulare zum Eintragen (oben im Einstieg und im Abschnitt „App holen“) ----
+     Jedes Formular nennt in data-status die id seiner Statusmeldung. Beim kompakten Formular oben (Klasse wl-kompakt)
+     klappen Häkchen und Einwilligungstext erst auf, wenn jemand hineintippt oder abschickt. */
+  function startFormulare() {
+    Array.prototype.forEach.call(document.querySelectorAll('form.wl-form'), startFormular);
+  }
+  function startFormular(form) {
     var email = form.elements.email;
     var kasten = form.elements.einwilligung;
     var lock = form.elements.website;                      /* Lockfeld gegen Bots – bleibt bei Menschen leer */
     var knopf = form.querySelector('button[type="submit"]');
-    var status = document.getElementById('warteliste-status');
+    var status = document.getElementById(form.getAttribute('data-status'));
+    if (!email || !kasten || !knopf || !status) return;
     var knopfText = knopf.textContent;
     var laeuft = false;
+    function aufklappen() { form.classList.add('is-offen'); }
+    if (form.classList.contains('wl-kompakt')) {
+      form.addEventListener('focusin', aufklappen);
+      email.addEventListener('input', aufklappen);
+    }
 
     /* Fehlertext am Feld ein-/ausblenden (das <p> hat die id des Feldes plus „-fehler“) */
     function setzeFehler(feld, text) {
@@ -94,6 +103,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (laeuft) return;
+      aufklappen();
 
       var adresse = email.value.trim();
       var ok = true;
@@ -175,6 +185,6 @@
     });
   }
 
-  startFormular();
+  startFormulare();
   startSeite();
 })();

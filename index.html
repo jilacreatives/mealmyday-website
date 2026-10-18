@@ -171,7 +171,34 @@
             Bald für Android und iPhone
           </p>
           <h1 id="hero-titel">Dein Mahlzeitenplan – aufs Gramm genau.</h1>
-          <p class="lead">MealMyDay erstellt dir Mahlzeitenpläne für 3 Tage oder bis zu vier Wochen – passend zu deinem Ziel, deiner Ernährungsweise und deinen Allergien. Mit Mengen aufs Gramm, Kalorien und Makros, kurzer Zubereitung und einer fertigen Einkaufsliste.</p>
+          <p class="lead">MealMyDay erstellt dir Mahlzeitenpläne für 3 Tage oder bis zu vier Wochen – passend zu deinem Ziel, deiner Ernährungsweise und deinen Allergien.<span class="lead-mehr"> Mit Mengen aufs Gramm, Kalorien und Makros, kurzer Zubereitung und einer fertigen Einkaufsliste.</span></p>
+          <!-- Bis zum Start: Warteliste gleich hier oben. Derselbe Einwilligungstext und dieselbe Fassung wie das Formular im
+               Abschnitt „App holen“ (warteliste.js bedient beide). Häkchen und Text klappen auf, sobald jemand das Feld antippt. -->
+          <div class="hero-wl">
+            <p class="hero-wl-titel" id="wl-oben-titel"><span class="nw"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8c-1.5 0-4-.5-4-2.5A1.5 1.5 0 0 1 10 4c1.5 0 2 2.5 2 4zm0 0c1.5 0 4-.5 4-2.5A1.5 1.5 0 0 0 14 4c-1.5 0-2 2.5-2 4z"/></svg>Jetzt auf die</span> Warteliste: 1&nbsp;Monat Premium gratis</p>
+            <form id="warteliste-oben" class="wl-form wl-kompakt" novalidate aria-labelledby="wl-oben-titel" data-status="warteliste-oben-status">
+              <div class="wl-zeile">
+                <label class="visually-hidden" for="wlo-email">Deine E-Mail-Adresse</label>
+                <input id="wlo-email" type="email" name="email" placeholder="Deine E-Mail-Adresse" autocomplete="email" required maxlength="254" inputmode="email" spellcheck="false" aria-describedby="wlo-email-fehler">
+                <button type="submit" class="btn btn-primary">Platz sichern</button>
+              </div>
+              <p class="field-error" id="wlo-email-fehler" hidden></p>
+              <!-- Lockfeld gegen Bots: für Menschen und Screenreader unsichtbar, bleibt leer -->
+              <div class="hp" aria-hidden="true">
+                <label for="wlo-website">Website</label>
+                <input id="wlo-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+              <div class="wl-mehr">
+                <div class="field field-check">
+                  <input id="wlo-einwilligung" type="checkbox" name="einwilligung" required aria-describedby="wlo-einwilligung-fehler">
+                  <label for="wlo-einwilligung">Ja, ich möchte auf die Warteliste. MealMyDay darf mir zum Start der App eine E-Mail mit meinem Gratis-Monat Premium schicken und mich danach gelegentlich per E-Mail über Neuigkeiten und Angebote zu MealMyDay informieren. Diese Einwilligung kann ich jederzeit widerrufen, zum Beispiel über den Abmelde-Link in jeder E-Mail.</label>
+                  <p class="field-error" id="wlo-einwilligung-fehler" hidden></p>
+                </div>
+                <p class="wl-ds"><a href="datenschutz.html#warteliste">Mehr dazu in der Datenschutzerklärung</a>. Du bekommst gleich eine E-Mail – erst nach deiner Bestätigung stehst du auf der Liste.</p>
+              </div>
+            </form>
+            <p class="wl-status" id="warteliste-oben-status" role="status" aria-live="polite" tabindex="-1"></p>
+          </div>
           <!-- Store-Knöpfe (siehe Hinweis im Abschnitt „App holen“ weiter unten) -->
           <div class="store-btns">
             <a class="store-btn is-soon" role="link" aria-disabled="true">
@@ -183,13 +210,6 @@
               <span><small>Bald verfügbar</small><b>App Store</b></span>
             </a>
           </div>
-          <!-- Bis zum Start: Warteliste mit Gratis-Monat (Formular im Abschnitt „App holen“) -->
-          <p class="hero-wl">
-            <a href="#warteliste">
-              <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8c-1.5 0-4-.5-4-2.5A1.5 1.5 0 0 1 10 4c1.5 0 2 2.5 2 4zm0 0c1.5 0 4-.5 4-2.5A1.5 1.5 0 0 0 14 4c-1.5 0-2 2.5-2 4z"/></svg>
-              <span>Auf die Warteliste – 1&nbsp;Monat Premium gratis</span>
-            </a>
-          </p>
           <ul class="hero-note">
             <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Kostenlos starten</li>
             <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Nährwerte aus einer Lebensmittel-Datenbank</li>
@@ -711,7 +731,7 @@
             </p>
             <h3 id="warteliste-titel">Sei von Anfang an dabei</h3>
             <p>Trag dich jetzt ein: Zum Start der App bekommst du eine E-Mail mit deinem Gratis-Monat Premium – und bist unter den Ersten, die MealMyDay ausprobieren.</p>
-            <form id="warteliste" class="wl-form" novalidate aria-labelledby="warteliste-titel">
+            <form id="warteliste" class="wl-form" novalidate aria-labelledby="warteliste-titel" data-status="warteliste-status">
               <div class="field">
                 <label for="wl-email">Deine E-Mail-Adresse</label>
                 <input id="wl-email" type="email" name="email" autocomplete="email" required maxlength="254" inputmode="email" spellcheck="false" aria-describedby="wl-email-fehler">
