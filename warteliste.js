@@ -10,7 +10,7 @@
   /* Adresse der Edge Function */
   var FUNKTION = 'https://nuxqaoaalgphnjkbpyqn.supabase.co/functions/v1/warteliste';
   /* Fassung des Einwilligungstexts – muss zum Wortlaut im Formular passen; der Server speichert sie als Nachweis */
-  var FASSUNG = '2026-10-12';
+  var FASSUNG = '2026-10-18';
   var WARTEN = 'Einen Moment …';
   var NETZFEHLER = 'Das hat gerade nicht geklappt. Bitte prüfe deine Verbindung und versuch es gleich noch einmal.';
 
