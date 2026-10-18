@@ -20,7 +20,19 @@
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
   function each(list, fn) { Array.prototype.forEach.call(list, fn); }
-  function msg(cls, html) { out.innerHTML = '<p class="bp-msg' + cls + '">' + html + '</p>'; }
+  /* Inhalt austauschen. Liegt der Bereich ganz über dem Fenster (man liest schon weiter unten), um die Höhenänderung
+     nachscrollen – sonst rutscht z. B. das Wartelisten-Formular nach dem Sprung von „Auf die Warteliste“ aus dem Bild. */
+  function setze(html) {
+    var drueber = out.getBoundingClientRect().bottom <= 0, vor = out.offsetHeight;
+    out.innerHTML = html;
+    var d = out.offsetHeight - vor;
+    if (!drueber || !d) return;
+    var root = document.documentElement, alt = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';            /* sofort, nicht weich – sonst sieht man den Ausgleich */
+    window.scrollBy(0, d);
+    root.style.scrollBehavior = alt;
+  }
+  function msg(cls, html) { setze('<p class="bp-msg' + cls + '">' + html + '</p>'); }
 
   /* ---- Eingaben lesen; Zahlen wie in der App begrenzt, leere Felder = Voreinstellung ---- */
   function num(name, def) { var v = parseFloat(String(form.elements[name].value).replace(',', '.')); return isNaN(v) ? def : v; }
@@ -101,7 +113,7 @@
       h += '<li class="bp-meal" style="--i:' + i + '"><p class="lab">' + esc(m.bez) + '</p><h4><span>' + esc(m.name) + '</span><span class="kcal">' + fmt(m.kcal) + ' kcal</span></h4><ul class="bp-ings">' + m.ings + '</ul></li>';
     });
     h += '</ul><p class="bp-more"><button type="button" class="btn btn-ghost btn-sm" id="bp-next">Anderer Vorschlag</button><span>Vorschlag ' + (idx % t.n + 1) + ' von ' + t.n + '</span></p>';
-    out.innerHTML = h;
+    setze(h);
 
     var numEl = out.querySelector('.num'), ring = out.querySelector('.ring-fg'), bars = out.querySelectorAll('.pbar i');
     function draw(p) {
@@ -192,11 +204,16 @@
       if (!sichtbar(en)) return;
       io.disconnect(); load();
     }, { rootMargin: '600px 0px' }).observe(sec);
-    /* Vorführung, sobald das Formular gut zu sehen ist (und die Daten da sind) */
+    /* Vorführung, sobald das Formular eine Weile gut zu sehen ist (und die Daten da sind) – nicht schon beim schnellen
+       Vorbeiscrollen, z. B. nach einem Tipp auf „Auf die Warteliste“; dann sähe sie ohnehin niemand */
+    var warte = null;
     new IntersectionObserver(function (en, io) {
-      if (!sichtbar(en)) return;
-      io.disconnect(); seen = true;
-      if (data && demo === 0) vorfuehrung();
+      if (!en[en.length - 1].isIntersecting) { clearTimeout(warte); warte = null; return; }
+      if (warte) return;
+      warte = setTimeout(function () {
+        io.disconnect(); seen = true;
+        if (data && demo === 0) vorfuehrung();
+      }, 800);
     }, { threshold: 0.35 }).observe(form);
   } else load();
 })();
