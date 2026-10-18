@@ -1,6 +1,6 @@
 /* MealMyDay – Warteliste (Startseite und warteliste.html). Reines JavaScript, keine Bibliotheken.
    Spricht mit der Edge Function bei Supabase – die einzige Anfrage dieser Website an einen fremden Server:
-   - Startseite, Formular #warteliste: E-Mail-Adresse eintragen (Aktion „eintragen“)
+   - Startseite, Formular #warteliste: E-Mail-Adresse eintragen (Aktion „eintragen“, mit der Herkunft aus dem Link)
    - warteliste.html: Anmeldung bestätigen bzw. abmelden über die Links aus den E-Mails (Aktionen „bestaetigen“, „abmelden“)
    Antwort des Servers ist immer JSON: Erfolg { ok: true, meldung: "…" }, Fehler (HTTP 4xx/5xx) { fehler: "…" }.
    Die Texte in meldung/fehler kommen vom Server und werden genau so angezeigt. */
@@ -39,6 +39,19 @@
     }).catch(function () {
       melden({ ok: false, text: NETZFEHLER });     /* Netzwerkfehler oder kein JSON */
     });
+  }
+
+  /* Parameter aus der Adresszeile, z. B. ?t=… oder ?quelle=… */
+  function parameter(name) {
+    var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
+    if (!m) return '';
+    try { return decodeURIComponent(m[1].replace(/\+/g, ' ')).trim(); } catch (e) { return ''; }
+  }
+
+  /* Herkunft aus dem Link, z. B. aus unserer Werbung: ?quelle=meta&kanal=ig&anzeige=3 – Einkaufszettel → „meta/ig/3 – Einkaufszettel“.
+     Geht nur mit dem Formular an den Server (der sie vereinheitlicht) und wird nicht im Browser gespeichert. */
+  function herkunft() {
+    return ['quelle', 'kanal', 'anzeige'].map(parameter).filter(function (s) { return s; }).join('/').slice(0, 200);
   }
 
   /* Meldung im Statusbereich zeigen (role="status" – Screenreader lesen sie von selbst vor) */
@@ -99,7 +112,8 @@
         email: adresse,
         einwilligung: true,
         fassung: FASSUNG,
-        website: lock ? lock.value : ''
+        website: lock ? lock.value : '',
+        quelle: herkunft()
       }, function (erg) {
         laeuft = false;
         knopf.disabled = false;
@@ -117,10 +131,6 @@
     var seite = document.getElementById('warteliste-seite');
     if (!seite) return;
 
-    function parameter(name) {
-      var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
-      return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')).trim() : '';
-    }
     var aktion = 'bestaetigen';
     var token = parameter('t');
     if (!token) { token = parameter('abmelden'); aktion = 'abmelden'; }
