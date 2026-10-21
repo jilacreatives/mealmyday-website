@@ -650,6 +650,9 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 .feat li { display: flex; gap: 10px; align-items: flex-start; margin: 0; font-weight: 600; }
 .feat .ic { width: 22px; height: 22px; color: var(--green); margin-top: 2px; }
 .plans-note { margin: 1.25rem 0 0; color: var(--muted); max-width: 70ch; }
+/* Kostenlos und Premium: zwei Karten, ohne Preise (die nennt nur die App) */
+@media (min-width: 720px) { .plans-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; } }
+.plan .plan-sub { margin: 0; color: var(--muted); font-weight: 700; }
 
 /* Häufige Fragen: <details>/<summary> ohne JavaScript; der Pfeil dreht sich beim Öffnen (bei reduzierter Bewegung ohne Übergang) */
 .faq { display: grid; gap: 10px; max-width: 760px; }
