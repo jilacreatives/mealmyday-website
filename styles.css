@@ -215,8 +215,8 @@ a, button, summary { touch-action: manipulation; }
 .foot-nav a { color: var(--ink); text-decoration: none; font-weight: 700; }
 .foot-nav a:hover { color: var(--green); text-decoration: underline; }
 /* Instagram als kleines Symbol (Grafik direkt in der Seite, lädt nichts von Instagram nach) */
-.foot-insta a, .foot-tiktok a { display: inline-flex; align-items: center; padding: 2px; border-radius: 6px; }
-.foot-insta svg, .foot-tiktok svg { display: block; }
+.foot-facebook a, .foot-insta a, .foot-tiktok a { display: inline-flex; align-items: center; padding: 2px; border-radius: 6px; }
+.foot-facebook svg, .foot-insta svg, .foot-tiktok svg { display: block; }
 .foot-note { color: var(--muted); font-size: .9rem; margin: 0 0 .5em; max-width: 70ch; }
 .foot-note a { color: var(--muted); font-weight: 700; }
 .foot-copy { color: var(--muted); font-size: .9rem; font-weight: 700; margin: 0; }
