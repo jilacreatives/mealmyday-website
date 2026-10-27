@@ -374,15 +374,12 @@ a, button, summary { touch-action: manipulation; }
 .demo { background: var(--surface-2); border-radius: var(--r-sm); padding: 12px 14px; }
 .lab { flex-basis: 100%; margin: 0; font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 
-/* „Passt zu dir“: Pillen wie in der App (weiß mit feiner Linie, die gewählte in Oliv);
-   ein Leuchtrand (::before) läuft der Reihe nach über die übrigen (--k = Reihenfolge) */
+/* „Passt zu dir“: Pillen wie in der App (weiß mit feiner Linie). animation.js wählt je Reihe eine Pille (is-on, Oliv)
+   und lässt die Auswahl reihum weiterspringen, solange die Karte sichtbar ist; ohne JavaScript ist nichts gewählt. */
 .pick-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0; }
 .pick-row + .pick-row { margin-top: 8px; }
-.chip { position: relative; z-index: 0; display: inline-flex; align-items: center; min-height: 34px; padding: 4px 13px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--field); font-weight: 500; font-size: .86rem; line-height: 1.25; }
+.chip { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 13px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--field); font-weight: 500; font-size: .86rem; line-height: 1.25; transition: background-color .3s ease, border-color .3s ease, color .3s ease; }
 .chip.is-on { background: var(--green); border-color: var(--green); color: var(--green-ink); font-weight: 600; }
-.chip::before { content: ""; position: absolute; inset: -1.5px; z-index: -1; border-radius: inherit; background: var(--green-soft); box-shadow: inset 0 0 0 2px var(--green); opacity: 0; }
-html.anim .live.is-on .chip:not(.is-on)::before { animation: chip-glow 7.7s infinite calc(var(--k) * .55s); }
-@keyframes chip-glow { 0%, 12%, 100% { opacity: 0; } 3%, 8% { opacity: 1; } }
 
 /* „Aufs Gramm berechnet“: eine Mahlzeiten-Karte wie in der App; Kalorien zählen hoch (animation.js),
    die Makro-Zeilen (Punkt, Balken, Gramm – wie die Tagesbilanz der App) füllen sich */
@@ -462,6 +459,15 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
   border: 1.5px solid var(--line); border-radius: var(--r-sm); background: var(--field); color: var(--ink);
 }
 .bp-form input:focus-visible, .bp-form select:focus-visible { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px var(--accent-soft); }
+/* Auswahlfeld mit eigenem Pfeil dicht am Rand (statt des breiten Systempfeils), damit „Mäßig aktiv (3–4× Sport pro Woche)“
+   auch bei 390 px ganz zu lesen ist; die Schrift bleibt mindestens 16 px, sonst zoomt iOS beim Antippen */
+.bp-form select {
+  appearance: none; -webkit-appearance: none; padding-right: 30px; cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6355' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center; background-size: 18px 18px;
+}
+@media (prefers-color-scheme: dark) { .bp-form select { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ABB2A2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); } }
+@media (max-width: 479px) { .bp-form select { font-size: 1rem; font-weight: 500; padding-left: 10px; } }
 .bp-hint { margin: 0; font-size: .88rem; color: var(--muted); font-weight: 500; }
 .bp-out { min-height: 160px; }
 .bp-msg { margin: 0; padding: 12px 16px; border-radius: var(--r-sm); background: var(--surface-2); color: var(--muted); font-weight: 600; }
@@ -804,6 +810,17 @@ html.anim .stage {
 .stage-cap { color: var(--muted); margin: 0; }
 @media (max-height: 760px) { html.anim .stage-cap { display: none; } html.anim .stage-head { margin-bottom: .75rem; } }
 @media (max-height: 700px) { html.anim .stage-head .eyebrow { display: none; } }
+/* Reicht die Bühne für Kopf und Szene nicht (kleine Handys, große Systemschrift), stuft animation.js beim Messen ab:
+   is-eng blendet die Unterzeile aus, is-eng2 auch die Kopfzeile, is-eng3 macht die Einkaufsliste kompakter –
+   so bleibt „Alles im Wagen“ am Ende immer ganz im Bild. */
+.stage.is-eng .stage-cap { display: none; }
+.stage.is-eng .stage-head { margin-bottom: .75rem; }
+.stage.is-eng2 .stage-head .eyebrow { display: none; }
+.stage.is-eng3 .list-card { padding: 10px 12px; }
+.stage.is-eng3 .list-card h3 { font-size: 1rem; }
+.stage.is-eng3 .list-group h4 { margin: 5px 0 0; font-size: .9rem; }
+.stage.is-eng3 .row { padding: 1px 0; font-size: .85rem; gap: 8px; }
+.stage.is-eng3 .badge-done { margin-top: 6px; padding: 5px 12px; font-size: .85rem; }
 
 .scene { display: block; }
 html.anim .scene { display: grid; }
@@ -879,8 +896,10 @@ html.anim .list-wrap { margin-top: 0; }
 .list-group h4 { font-family: var(--f-display); font-size: .95rem; font-weight: 600; color: var(--ink); margin: 10px 0 2px; }
 @media (min-width: 600px) { .list-group h4 { margin: 12px 0 4px; font-size: 1.05rem; } }
 .list-group ul { list-style: none; margin: 0; padding: 0; }
-.row { display: grid; grid-template-columns: var(--row-ico) minmax(0, 1fr) auto 24px; align-items: center; gap: 10px; padding: 3px 0; margin: 0; font-weight: 500; font-size: .9rem; line-height: 1.35; }
+.row { display: grid; grid-template-columns: var(--row-ico) minmax(0, 1fr) auto 24px; align-items: center; gap: 10px; padding: 2px 0; margin: 0; font-weight: 500; font-size: .9rem; line-height: 1.35; }
 @media (min-width: 600px) { .row { font-size: 1rem; padding: 5px 0; } }
+/* schmale Handys: Bereiche und Abzeichen enger, damit die Liste in die klebende Bühne passt */
+@media (max-width: 599px) { .list-group h4 { margin: 7px 0 0; } .badge-done { margin-top: 8px; } }
 .row-slot { width: var(--row-ico); height: var(--row-ico); }
 .row-slot svg { width: 100%; height: 100%; display: block; overflow: visible; }
 html.anim .row-slot svg { visibility: hidden; }

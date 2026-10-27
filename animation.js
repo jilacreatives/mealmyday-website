@@ -68,7 +68,10 @@
   function startLive() {
     if (!('IntersectionObserver' in window)) return;
     liveIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { en.target.classList.toggle('is-on', en.isIntersecting); });
+      entries.forEach(function (en) {
+        en.target.classList.toggle('is-on', en.isIntersecting);
+        if (en.target.classList.contains('pick')) { if (en.isIntersecting) pickStart(en.target); else pickStop(en.target, false); }
+      });
     }, { threshold: 0.25 });
     each(document.querySelectorAll('.live'), function (e) { liveIO.observe(e); });
   }
@@ -76,6 +79,30 @@
     if (liveIO) liveIO.disconnect();
     liveIO = null;
     each(document.querySelectorAll('.live.is-on'), function (e) { e.classList.remove('is-on'); });
+    each(document.querySelectorAll('.live.pick'), function (e) { pickStop(e, true); });
+  }
+
+  /* ---- „Passt zu dir“: in jeder Reihe ist genau eine Pille gewählt (is-on); reihum springt die Auswahl einer Reihe
+          zur nächsten Pille, wie beim Antippen. Läuft nur, solange die Karte sichtbar ist; ohne Bewegung ist nichts gewählt. ---- */
+  function pickStart(el) {
+    if (el._takt) return;
+    var reihen = Array.prototype.map.call(el.querySelectorAll('.pick-row'), function (r) { return r.querySelectorAll('.chip'); });
+    if (!el._wahl) el._wahl = [-1, -1, -1];   /* Start ohne Auswahl; die ersten Takte wählen Reihe für Reihe die erste Pille */
+    var reihe = 0;
+    function zeigen() {
+      reihen.forEach(function (chips, i) { each(chips, function (c, j) { c.classList.toggle('is-on', j === el._wahl[i]); }); });
+    }
+    zeigen();
+    el._takt = setInterval(function () {
+      el._wahl[reihe] = (el._wahl[reihe] + 1) % reihen[reihe].length;
+      zeigen();
+      reihe = (reihe + 1) % reihen.length;
+    }, 1300);
+  }
+  function pickStop(el, leeren) {
+    clearInterval(el._takt);
+    el._takt = 0;
+    if (leeren) each(el.querySelectorAll('.chip.is-on'), function (c) { c.classList.remove('is-on'); });
   }
 
   /* ---- Geschichte: Zutaten → Teller → Einkaufsliste ---- */
@@ -153,6 +180,10 @@
       S.platesWrap.style.transform = '';
       S.listWrap.style.transform = '';
       S.balance.style.transform = '';
+      /* Passt die Szene samt Kopf nicht in die Bühne (kleine Handys, große Systemschrift), stufenweise Platz schaffen:
+         Unterzeile weg, dann Kopfzeile weg, dann die Liste kompakter (Klassen in styles.css) */
+      stage.classList.remove('is-eng', 'is-eng2', 'is-eng3');
+      ['is-eng', 'is-eng2', 'is-eng3'].forEach(function (k) { if (stage.scrollHeight > stage.clientHeight) stage.classList.add(k); });
       var sr = stage.getBoundingClientRect();
       S.flyers.forEach(function (f) {
         var r = f.slot.getBoundingClientRect();
@@ -266,6 +297,7 @@
     window.removeEventListener('orientationchange', S.onResize);
     window.removeEventListener('load', S.onResize);
     clearTimeout(S.rt);
+    S.stage.classList.remove('is-eng', 'is-eng2', 'is-eng3');
     S.layer.innerHTML = '';
     [S.platesWrap, S.listWrap, S.balance, S.badge].forEach(function (el) { el.style.opacity = ''; el.style.transform = ''; });
     S.balBars.forEach(function (b) { b.el.style.transform = ''; });
