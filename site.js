@@ -1,12 +1,29 @@
-/* MealMyDay – Kopfzeile (alle Seiten). Reines JavaScript, keine Bibliotheken, keine externen Anfragen.
-   - trägt die tatsächliche Kopfhöhe als CSS-Variable --head-h ein (für Ankersprünge und die Bühne der Startseite)
+/* MealMyDay – Kopfzeile und Einblenden (alle Seiten). Reines JavaScript, keine Bibliotheken, keine externen Anfragen.
+   - trägt die tatsächliche Kopfhöhe als CSS-Variable --head-h ein (für Ankersprünge)
    - setzt die Klasse is-scrolled, sobald gescrollt ist (feine Linie/Schatten unter der Kopfzeile)
    - hebt den Navigationspunkt des Abschnitts hervor, in dem man gerade liest (IntersectionObserver)
+   - blendet Elemente mit der Klasse reveal dezent ein, sobald sie ins Bild kommen (Klasse is-in; die Klasse js am
+     <html> schaltet das Ausblenden im CSS erst frei – ohne JavaScript ist alles von Anfang an sichtbar)
    Ohne JavaScript bleibt die Kopfzeile trotzdem sticky; die Höhe kommt dann aus dem CSS-Vorgabewert. */
 (function () {
   'use strict';
 
   var root = document.documentElement;
+
+  /* ---- Einblenden beim Hereinscrollen ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  if (reveals.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add('js');
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('is-in');
+        revealIO.unobserve(en.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    Array.prototype.forEach.call(reveals, function (el) { revealIO.observe(el); });
+  }
+
   var head = document.querySelector('.site-head');
   if (!head) return;
 
