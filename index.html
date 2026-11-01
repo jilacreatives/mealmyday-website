@@ -219,7 +219,7 @@
             </a>
           </div>
           <ul class="hero-note">
-            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Kostenlos starten</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Erste Woche gratis</li>
             <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Nährwerte aus einer Lebensmittel-Datenbank</li>
             <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Daten in der EU gespeichert</li>
           </ul>
@@ -412,8 +412,8 @@
             </div>
             <ul class="fx-list">
               <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Einkaufsliste</b> – zusammengezählt und nach Supermarkt-Bereichen sortiert, bei längeren Plänen nach Wochen filterbar.</span></li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Gerichte tauschen</b> – kostenlos fünfmal pro Plan, mit Premium unbegrenzt.</span></li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Favoriten und gespeicherte Pläne</b> – mit Premium merkst du dir so viele Gerichte, wie du willst, und deine letzten 10 Pläne bleiben gespeichert.</span></li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Gerichte tauschen</b> – so oft du willst; die App merkt sich, was du nicht magst.</span></li>
+              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg><span><b>Favoriten und vergangene Wochen</b> – merk dir so viele Gerichte, wie du willst; deine letzten 10 Wochen bleiben gespeichert.</span></li>
             </ul>
           </article>
         </div>
@@ -625,40 +625,46 @@
       </div>
     </section>
 
-    <!-- ===== Kostenlos starten: bewusst ohne Preise (Entscheidung vom 21. Oktober 2026) – den Preis von Premium
-         zeigt die App, in der Währung des Nutzers. Bis zum Start „Bald …“, danach: „Lad dir die App kostenlos runter und
-         fang an zu preppen.“ und Abzeichen „Gleich loslegen“ ===== -->
+    <!-- ===== Preise (seit 1. November 2026, Wochen-Modell): keine kostenlose Version mehr, Premium als Abo – monatlich
+         6,99 € oder jährlich 39,99 € (wie ABO_PREIS in src/logic/abo.ts der App und in den Stores). Die erste Woche ist
+         gratis (Gratis-Woche ohne Abo und Zahlungsdaten). Anker #kostenlos bleibt, damit alte Links funktionieren. ===== -->
     <section class="section" id="kostenlos" aria-labelledby="kostenlos-titel">
       <div class="wrap">
         <div class="section-head reveal">
           <h2 id="kostenlos-titel">Preise</h2>
-          <p>Bald kannst du dir die App kostenlos runterladen und direkt anfangen zu preppen.</p>
+          <p>Ein Premium mit allem – monatlich oder jährlich. Ausprobieren kostet nichts.</p>
         </div>
+        <p class="plans-gratis reveal"><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8c-1.5 0-4-.5-4-2.5A1.5 1.5 0 0 1 10 4c1.5 0 2 2.5 2 4zm0 0c1.5 0 4-.5 4-2.5A1.5 1.5 0 0 0 14 4c-1.5 0-2 2.5-2 4z"/></svg><span><b>Deine erste Woche ist gratis:</b> 7&nbsp;Tage Premium mit allen Funktionen – ohne Abo und ohne Zahlungsdaten. Danach entscheidest du, ob du monatlich oder jährlich weitermachst.</span></p>
         <div class="plans plans-2">
-          <article class="plan plan-featured reveal live" style="--i:0" aria-labelledby="plan-free">
-            <span class="plan-badge">Zum Start kostenlos</span>
-            <h3 id="plan-free">Kostenlos</h3>
-            <p class="plan-sub">Ohne Abo – du brauchst nur ein kostenloses Konto.</p>
-            <ul class="feat">
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>1 Plan für 3 Tage pro Woche</li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>5× Gerichte tauschen pro Plan</li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Alle Filter, Allergien &amp; Einkaufsliste</li>
-            </ul>
+          <article class="plan plan-featured reveal live" style="--i:0" aria-labelledby="plan-jahr">
+            <span class="plan-badge">Beliebt – 52&nbsp;% sparen</span>
+            <h3 id="plan-jahr">Jährlich</h3>
+            <p class="price"><strong>39,99&nbsp;€</strong><span>pro Jahr</span></p>
+            <p class="price-alt">nur <b>3,33&nbsp;€</b> im Monat</p>
+            <p class="plan-extra">Volles Vorratsregal (12&nbsp;Wochen): ein Gratismonat zum Verschenken</p>
           </article>
-          <article class="plan reveal" style="--i:1" aria-labelledby="plan-premium">
-            <h3 id="plan-premium">Premium</h3>
-            <p class="plan-sub">Wenn du mehr willst: einmal in der App freischalten – kein Abo.</p>
-            <ul class="feat">
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Unbegrenzt viele Pläne</li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Bis zu 4 Wochen im Voraus planen</li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Einkaufsliste nach Wochen</li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Gerichte unbegrenzt tauschen</li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Unbegrenzt Favoriten</li>
-              <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Deine letzten 10 Pläne gespeichert</li>
-            </ul>
+          <article class="plan reveal" style="--i:1" aria-labelledby="plan-monat">
+            <h3 id="plan-monat">Monatlich</h3>
+            <p class="price"><strong>6,99&nbsp;€</strong><span>pro Monat</span></p>
+            <p class="price-alt">monatlich kündbar</p>
+            <p class="plan-extra">Volles Vorratsregal (12&nbsp;Wochen): ein Monat geschenkt</p>
           </article>
         </div>
-        <p class="plans-note reveal">Für einen Plan brauchst du ein kostenloses Konto. Premium kannst du bei Bedarf direkt in der App freischalten, bezahlt wird über Google Play bzw. den App Store.</p>
+        <div class="plans-alles reveal">
+          <h3>In beiden Varianten steckt alles drin</h3>
+          <ul class="feat">
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Wochenplan passend zu deinem Einkaufstag</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Vorschau auf die nächsten Wochen</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Rezepte mit Mengen aufs Gramm und Zubereitung</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Automatische Einkaufsliste</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Unbegrenzt tauschen und neu zusammenstellen</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Dein Plan lernt aus deinem Tauschen</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Alle Ernährungsweisen und Allergie-Filter</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Favoriten und vergangene Wochen</li>
+            <li><svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Vorratsregal mit Prämien</li>
+          </ul>
+        </div>
+        <p class="plans-note reveal">Abgeschlossen und bezahlt wird in der App über Google Play bzw. den App Store. Das Abo verlängert sich automatisch, bis du es in den Abo-Einstellungen des Stores kündigst – das geht jederzeit. Preise in Deutschland inklusive Mehrwertsteuer, in der App siehst du sie in deiner Währung. Auf der Warteliste bekommst du zum Start sogar einen Monat Premium gratis.</p>
       </div>
     </section>
 
@@ -679,8 +685,8 @@
             <p>Die 14 EU-Hauptallergene und Laktose lassen sich ausschließen – Zutaten mit einem ausgeschlossenen Allergen kommen nie in deinen Plan. Prüfe trotzdem immer das Etikett: Rezepturen der Hersteller ändern sich, und Spuren kann die App nicht kennen.</p>
           </details>
           <details class="faq-item reveal" style="--i:2">
-            <summary>Kann ich MealMyDay kostenlos nutzen?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
-            <p>Ja. Die App wird kostenlos zum Herunterladen sein, und mit einem kostenlosen Konto erstellst du 1 Plan pro Woche für 3 Tage und kannst Gerichte 5× pro Plan tauschen. Wenn du mehr willst, schaltest du Premium einmal in der App frei: unbegrenzt viele Pläne für bis zu 4 Wochen im Voraus, Gerichte unbegrenzt tauschen und so viele Favoriten, wie du willst. Das ist kein Abo – es verlängert sich nichts, und du musst nichts kündigen.</p>
+            <summary>Was kostet MealMyDay?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p>Die App lädst du kostenlos herunter, und die erste Woche ist gratis: 7 Tage Premium, ohne Abo und ohne Zahlungsdaten. Danach geht es mit Premium weiter – als Abo für 6,99 € im Monat oder 39,99 € im Jahr (52 % gespart). Abgeschlossen wird über Google Play bzw. den App Store, kündigen kannst du jederzeit in den Abo-Einstellungen des Stores. Wer sich vor dem Start auf die Warteliste einträgt, bekommt einen Monat Premium gratis.</p>
           </details>
           <details class="faq-item reveal" style="--i:3">
             <summary>Wo liegen meine Daten?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
@@ -718,7 +724,7 @@
                 <span><small>Bald verfügbar</small><b>App Store</b></span>
               </a>
             </div>
-            <p>Die App wird kostenlos. Premium kannst du bei Bedarf einmal in der App freischalten – kein Abo.</p>
+            <p>Herunterladen kostet nichts, und die erste Woche ist gratis. Danach geht es mit Premium weiter – monatlich oder jährlich (<a href="#kostenlos">Preise</a>).</p>
           </div>
 
           <!-- Warteliste bis zum Start: E-Mail eintragen, Bestätigung per Link (Double-Opt-in), 1 Monat Premium gratis.

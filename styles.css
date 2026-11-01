@@ -623,6 +623,16 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 .feat li { display: flex; gap: 10px; align-items: flex-start; margin: 0; font-weight: 600; }
 .feat .ic { width: 22px; height: 22px; color: var(--green); margin-top: 2px; }
 .plans-note { margin: 1.25rem 0 0; color: var(--muted); max-width: 70ch; }
+/* Hinweis über den Preisen: erste Woche gratis (Aprikose wie die Hinweise in der App) */
+.plans-gratis { display: flex; gap: 12px; align-items: flex-start; max-width: 860px; margin: 0 0 28px; padding: 16px 18px; border-radius: var(--r); background: var(--hinweis-soft); color: var(--ink); font-size: 1.05rem; line-height: 1.5; }
+.plans-gratis .ic { width: 26px; height: 26px; flex: none; color: var(--hinweis); margin-top: 1px; }
+.plans-gratis b { color: var(--hinweis-text); }
+.plan .plan-extra { margin: auto 0 0; padding-top: 12px; border-top: 2px solid var(--line); font-weight: 600; }
+/* gemeinsame Funktionsliste unter den beiden Preiskarten (Konzept 13.3: gleicher Umfang) */
+.plans-alles { max-width: 860px; margin-top: 20px; padding: 22px; background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); }
+.plans-alles h3 { margin: 0; font-size: 1.15rem; }
+.plans-alles .feat { border-top: 0; padding-top: 4px; display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) { .plans-alles .feat { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; } }
 /* Kostenlos und Premium: zwei Karten, ohne Preise (die nennt nur die App) */
 @media (min-width: 720px) { .plans-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; } }
 .plan .plan-sub { margin: 0; color: var(--muted); font-weight: 700; }
