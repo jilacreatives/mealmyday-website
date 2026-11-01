@@ -720,6 +720,12 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 .page-head h1 { hyphens: auto; overflow-wrap: anywhere; }
 @media (max-width: 400px) { .page-head h1 { font-size: 1.85rem; } }
 .page-head .lead { margin: 0; }
+/* Umschalter Deutsch / English bei Impressum und Datenschutz (eigene Seiten …-en.html; maßgeblich ist die deutsche Fassung) */
+.lang-switch { display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 1rem; background: var(--surface2); border: 1.5px solid var(--line); border-radius: 999px; }
+.lang-switch a { padding: .4rem 1rem; border-radius: 999px; font-family: var(--f-display); font-weight: 600; font-size: .92rem; line-height: 1.2; color: var(--ink); text-decoration: none; }
+.lang-switch a:hover { background: var(--surface); }
+.lang-switch a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+.page-head .lang-note { margin: .75rem 0 0; font-size: .92rem; color: var(--muted); }
 .prose { max-width: 70ch; }
 .prose h2 { font-size: clamp(1.35rem, 1.1rem + 1.2vw, 1.7rem); margin-top: 2.2rem; }
 .prose h3 { margin-top: 1.5rem; font-size: 1.15rem; }
