@@ -243,6 +243,22 @@ a, button, summary { touch-action: manipulation; }
 @media (min-width: 720px) { .section { padding-top: 4.5rem; } }
 .section-head { max-width: 62ch; margin-bottom: 1.75rem; }
 .section-head p { color: var(--muted); font-size: 1.05em; margin: 0; }
+/* Wie funktioniert MealMyDay? – drei Schritte mit Bildschirmfoto (unten ausgeblendet); ab 860 px nebeneinander */
+.schritte { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+@media (min-width: 860px) { .schritte { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; } }
+.schritt { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.schritt-bild { margin: 0 auto; width: min(100%, 320px); aspect-ratio: 780 / 1200; overflow: hidden; border-radius: 28px 28px 0 0;
+  border: 1.5px solid var(--line); border-bottom: 0; background: var(--bg);
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 99%); mask-image: linear-gradient(to bottom, #000 72%, transparent 99%); }
+.schritt-bild img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.schritt-text { margin-top: -48px; position: relative; }
+.schritt-nr { margin: 0 0 6px; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--green); color: var(--green-ink); font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; }
+.schritt h3 { margin: 0 0 6px; font-size: 1.25rem; }
+.schritt-text > p:not(.schritt-nr) { margin: 0; color: var(--muted); }
+.schritt-liste { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.schritt-liste li { display: flex; gap: 8px; align-items: flex-start; margin: 0; font-weight: 600; font-size: .95rem; }
+.schritt-liste .ic { width: 20px; height: 20px; flex: none; color: var(--green); margin-top: 2px; }
+.schritt-text .schritt-klein { margin-top: 10px; font-size: .92rem; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: .8rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
