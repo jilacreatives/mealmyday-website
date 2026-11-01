@@ -414,6 +414,7 @@ html.anim .reveal .no i { transform: scale(0); transition: transform .35s cubic-
 .swap { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
 .sw-a, .sw-b { grid-area: 1 / 1; display: flex; align-items: center; gap: 10px; min-width: 0; font-family: var(--f-display); font-weight: 600; font-size: .95rem; line-height: 1.3; }
 .sw-a > svg, .sw-b > svg { width: 34px; height: 34px; flex: none; overflow: visible; }
+.sw-a > img, .sw-b > img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; flex: none; background: var(--surface2); }
 .sw-a small, .sw-b small { display: block; font-family: var(--f-body); font-size: .8rem; font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
 .sw-b { opacity: 0; align-self: stretch; background: var(--surface); }
 /* die zwei Knöpfe wie „Anderes Gericht“ und „Merken“ unter einer Mahlzeit in der App (weiß, feine Linie) */
@@ -487,6 +488,8 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 /* Mahlzeiten-Karte wie im Plan der App: Symbol-Kachel, Typ, Name, Kalorien – darunter Makro-Kacheln und Zutaten */
 .meal { padding: 14px; background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); min-width: 0; }
 .meal-head { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+/* kleines Bild des Gerichts wie in der App (64 px, Rundung 14) */
+.meal-bild { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; flex: none; background: var(--surface2); }
 .meal-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .meal-typ { font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 .meal-name { font-family: var(--f-display); font-weight: 600; font-size: 1rem; line-height: 1.3; margin: 0; }

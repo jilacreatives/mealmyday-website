@@ -1,8 +1,9 @@
 /* MealMyDay – Beispiel-Planer („Probier's aus“ auf der Startseite). Reines JavaScript, keine Bibliotheken.
-   Rechnet wie die App (src/logic/nutrition.ts) vollständig im Browser. Geladen wird nur beispiele.json vom eigenen
-   Server – erst, wenn der Abschnitt in die Nähe scrollt oder jemand etwas antippt. Nichts wird gesendet oder gespeichert.
+   Rechnet wie die App (src/logic/nutrition.ts) vollständig im Browser. Geladen werden nur beispiele.json und die kleinen
+   Bilder der Gerichte (assets/gerichte/, vom Skript website:beispiele der App kopiert) vom eigenen Server – erst, wenn
+   der Abschnitt in die Nähe scrollt oder jemand etwas antippt. Nichts wird gesendet oder gespeichert.
    Das Ergebnis sieht aus wie „Mein Plan“ in der App: Tagesbilanz-Karte mit Kalorien, Balken und Makro-Zeilen, darunter
-   je Mahlzeit eine Karte mit Symbol, Makro-Kacheln und Zutaten.
+   je Mahlzeit eine Karte mit dem kleinen Bild des Gerichts (ohne Bild das Symbol), Makro-Kacheln und Zutaten.
    Beim ersten Hereinscrollen läuft einmal eine kurze Vorführung (drei Einstellungen tippen sich an, dann erscheint
    der Tag); sie bricht ab, sobald jemand selbst etwas antippt oder tippt. Bewegt werden nur transform und Text. */
 (function () {
@@ -95,7 +96,7 @@
         ings.push('<li><b>' + esc(teile[0]) + '</b><span>' + esc(lm[0]) + (teile[1] ? ' <small>' + esc(teile.slice(1).join(' · ')) + '</small>' : '') + '</span></li>');
       });
       for (i = 0; i < 4; i++) tot[i] += mk[i];
-      meals.push({ bez: m[0], name: data.gerichte[m[1]], tot: mk, ings: ings.join('') });
+      meals.push({ bez: m[0], name: data.gerichte[m[1]], bild: data.bilder ? data.bilder[m[1]] : '', tot: mk, ings: ings.join('') });
     });
     return { meals: meals, tot: tot, n: tage.length };
   }
@@ -116,7 +117,10 @@
       mrow('Eiweiß', 'mp', t.tot[1], z.p) + mrow('Kohlenhydrate', 'mc', t.tot[2], z.c) + mrow('Fett', 'mf', t.tot[3], z.f) + '</div>' +
       '<p class="bal-sub">' + (z.min ? 'Aus Sicherheitsgründen plant MealMyDay nie unter 1.200 kcal.' : 'Tagesbilanz – passt zu deinem Ziel.') + '</p></div><ul class="bp-meals">';
     t.meals.forEach(function (m, i) {
-      h += '<li class="meal bp-meal" style="--i:' + i + '"><div class="meal-head"><span class="tile tile-green"><svg class="ic" aria-hidden="true"><use href="#i-' + (LOOK[m.bez] || 'apple') + '"/></svg></span>' +
+      h += '<li class="meal bp-meal" style="--i:' + i + '"><div class="meal-head">' +
+        (m.bild
+          ? '<img class="meal-bild" src="assets/gerichte/' + encodeURIComponent(m.bild) + '" alt="" width="64" height="64" decoding="async">'
+          : '<span class="tile tile-green"><svg class="ic" aria-hidden="true"><use href="#i-' + (LOOK[m.bez] || 'apple') + '"/></svg></span>') +
         '<div class="meal-text"><span class="meal-typ">' + esc(m.bez) + '</span><h4 class="meal-name">' + esc(m.name) + '</h4><span class="meal-info">' + fmt(m.tot[0]) + ' kcal</span></div></div>' +
         '<div class="macros">' + kachel('m-p', m.tot[1], 'Eiweiß') + kachel('m-c', m.tot[2], 'Kohlenhydrate') + kachel('m-f', m.tot[3], 'Fett') + '</div>' +
         '<div class="abschnitt"><b>Zutaten</b><ul class="zutaten">' + m.ings + '</ul></div></li>';
