@@ -101,7 +101,7 @@
 
         <h2 id="ueberblick">2. Das Wichtigste in Kürze</h2>
         <ul>
-          <li>Für MealMyDay brauchst du ein Konto, mit E-Mail-Adresse und Passwort oder in der Android-App mit deinem Google-Konto (Abschnitt 4).</li>
+          <li>Für MealMyDay brauchst du ein Konto, mit E-Mail-Adresse und Passwort, in der Android-App auch mit deinem Google-Konto und in der iPhone-App mit deiner Apple-ID (Abschnitt 4).</li>
           <li>Deine Daten liegen auf Servern in Frankfurt am Main (EU).</li>
           <li>Für deine Wochenpläne brauchen wir Gesundheitsdaten wie Gewicht, Kalorienziel oder Allergien. Wir speichern sie <strong>nur mit deiner ausdrücklichen Einwilligung</strong> in deinem Konto. Ohne diese Einwilligung kann MealMyDay keine Wochen für dich planen. Du kannst sie jederzeit widerrufen (Abschnitt 5).</li>
           <li>Die App und diese Website enthalten <strong>keine Werbung, kein Tracking und keine Analyse-Dienste</strong>. Wir verkaufen keine Daten und geben sie nicht für Werbung weiter.</li>
@@ -139,7 +139,7 @@
         <p>Für MealMyDay brauchst du ein Konto. Dafür verarbeiten wir:</p>
         <ul>
           <li><strong>E-Mail-Adresse</strong> – als Anmeldename und für Bestätigungs- und Sicherheitsnachrichten,</li>
-          <li><strong>Passwort</strong> – nur verschlüsselt (als Hashwert). Dein Passwort im Klartext kennen wir nicht. Meldest du dich mit Google an, gibt es kein Passwort.</li>
+          <li><strong>Passwort</strong> – nur verschlüsselt (als Hashwert). Dein Passwort im Klartext kennen wir nicht. Meldest du dich mit Google oder Apple an, gibt es kein Passwort.</li>
           <li><strong>Konto-Kennung</strong> – eine zufällige Nummer, unter der deine Daten gespeichert sind,</li>
           <li><strong>Zeitpunkte</strong> der Registrierung, der Bestätigung deiner E-Mail-Adresse und der letzten Anmeldung,</li>
           <li><strong>angemeldete Sitzungen</strong> – für jede aktive Anmeldung die IP-Adresse und die Art des Geräts bzw. der App (technische Kennung des Programms, „User-Agent“), um Missbrauch zu erkennen,</li>
@@ -158,6 +158,15 @@
         <p>Diese Angaben speichern wir bei Supabase mit deinem Konto. Die E-Mail-Adresse nutzen wir wie bei der Anmeldung mit Passwort. Gibt es schon ein Konto mit derselben bestätigten Adresse, meldest du dich in diesem Konto an. Deinen Vornamen schlägt die App beim Einrichten für die Anrede vor. Du kannst ihn ändern oder weglassen. Dein Profilbild zeigt die App nicht an. Auf andere Daten deines Google-Kontos, zum Beispiel Kontakte oder Dateien, haben wir keinen Zugriff.</p>
         <p>Für die Anmeldung selbst ist Google (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) eigener Verantwortlicher. Google erfährt dabei, dass du dich bei MealMyDay anmeldest. Es gilt die <a href="https://policies.google.com/privacy?hl=de" rel="noopener">Datenschutzerklärung von Google</a>. Wenn du dich in der App abmeldest, meldet sie dich auch bei Google ab. Die Verbindung zwischen MealMyDay und deinem Google-Konto kannst du außerdem jederzeit in deinem Google-Konto unter „Drittanbieter-Apps und -Dienste“ trennen.</p>
         <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO. Die Anmeldung mit Google ist freiwillig. Du kannst MealMyDay auch mit E-Mail-Adresse und Passwort nutzen.</p>
+        <h3>Anmelden mit Apple</h3>
+        <p>In der iPhone-App kannst du dich statt mit E-Mail-Adresse und Passwort auch mit deiner Apple-ID anmelden („Weiter mit Apple“). Du bestätigst das auf deinem iPhone, zum Beispiel mit Face ID, und Apple bestätigt uns die Anmeldung mit einem signierten Nachweis. Dabei erhalten wir von Apple:</p>
+        <ul>
+          <li>eine <strong>Kennung</strong>, die Apple nur für MealMyDay vergibt,</li>
+          <li>eine <strong>E-Mail-Adresse</strong>: die deiner Apple-ID oder, wenn du „E-Mail-Adresse verbergen“ wählst, eine Ersatzadresse von Apple, die Nachrichten an dich weiterleitet,</li>
+          <li>nur bei der ersten Anmeldung und nur, wenn du ihn teilst, deinen <strong>Namen</strong>.</li>
+        </ul>
+        <p>Diese Angaben speichern wir bei Supabase mit deinem Konto und nutzen sie wie bei der Anmeldung mit Google. Den Gratis-Monat für die Warteliste gibt es nur zur selben E-Mail-Adresse, mit einer Ersatzadresse von Apple also nicht. Für die Anmeldung selbst ist Apple (Apple Distribution International Limited, Hollyhill Industrial Estate, Hollyhill, Cork, Irland) eigener Verantwortlicher. Es gilt die <a href="https://www.apple.com/de/legal/privacy/" rel="noopener">Datenschutzrichtlinie von Apple</a>. Die Verbindung zu MealMyDay kannst du jederzeit in den Einstellungen deines iPhones trennen (Apple-Account → Anmelden und Sicherheit → Mit Apple anmelden).</p>
+        <p>Löschst du dein Konto, bestätigst du dabei einmal mit Apple. Mit dem einmaligen Code, den Apple dafür ausgibt, bitten wir Apple, die Anmeldung bei MealMyDay aufzuheben. Anmeldedaten von Apple bewahren wir dafür nicht auf. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO. Die Anmeldung mit Apple ist freiwillig.</p>
 
         <h2 id="gesundheitsdaten">5. Deine Angaben und Gesundheitsdaten</h2>
         <p>Damit MealMyDay deinen Kalorienbedarf berechnen und deine Wochen passend planen kann, gibst du in der App an:</p>
@@ -213,7 +222,7 @@
 
         <h2 id="export">8. Datenexport und Konto löschen</h2>
         <p>Unter „Meine Daten exportieren“ im Profil lädt die App alle Daten deines Kontos und erstellt daraus <strong>auf deinem Gerät</strong> eine PDF-Datei. Auf unserem Server wird dafür nichts zusätzlich gespeichert. Ob und wo du die Datei speicherst oder teilst, entscheidest du.</p>
-        <p>Unter „Konto löschen“ im Profil löschst du dein Konto nach einer Rückfrage sofort und endgültig, mit allen Einstellungen, Einwilligungen, Wochen, dem Tausch-Protokoll, dem Gewichtsverlauf, Favoriten, Belohnungen und Geschenk-Codes, dem Tarif und der Planzählung älterer Versionen. Dabei löschen wir auch deinen Kundeneintrag bei RevenueCat. <strong>Ein laufendes Abo endet dadurch nicht</strong> – kündige es in den Abo-Einstellungen von Google Play bzw. deines Apple-Kontos. Kaufbelege bewahren Google bzw. Apple nach eigenen Regeln auf. Löschen kannst du dein Konto auch per E-Mail, siehe <a href="konto-loeschen.html">Konto und Daten löschen</a>.</p>
+        <p>Unter „Konto löschen“ im Profil löschst du dein Konto nach einer Rückfrage sofort und endgültig, mit allen Einstellungen, Einwilligungen, Wochen, dem Tausch-Protokoll, dem Gewichtsverlauf, Favoriten, Belohnungen und Geschenk-Codes, dem Tarif und der Planzählung älterer Versionen. Dabei löschen wir auch deinen Kundeneintrag bei RevenueCat. Hast du dich mit Apple angemeldet, heben wir außerdem die Anmeldung bei Apple auf (Abschnitt 4). <strong>Ein laufendes Abo endet dadurch nicht</strong> – kündige es in den Abo-Einstellungen von Google Play bzw. deines Apple-Kontos. Kaufbelege bewahren Google bzw. Apple nach eigenen Regeln auf. Löschen kannst du dein Konto auch per E-Mail, siehe <a href="konto-loeschen.html">Konto und Daten löschen</a>.</p>
         <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. c DSGVO in Verbindung mit Art. 15, 17 und 20 DSGVO.</p>
 
         <h2 id="ki">9. Gerichte mit KI</h2>
@@ -303,7 +312,7 @@
           <dd>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Postfach support@jilacreatives.de. <a href="https://policies.google.com/privacy?hl=de" rel="noopener">Datenschutzhinweise</a></dd>
         </dl>
         <p><strong>Hosting dieser Website:</strong> GitHub Pages, GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. GitHub verarbeitet die technischen Zugriffsdaten (Abschnitt 12) nach seinen eigenen <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">Datenschutzbestimmungen</a>.</p>
-        <p><strong>Eigene Verantwortliche</strong> sind Google (Google Play) und Apple (App Store) für Download, Kauf und Bezahlung (Abschnitt 10) und Google für die Anmeldung mit Google (Abschnitt 4).</p>
+        <p><strong>Eigene Verantwortliche</strong> sind Google (Google Play) und Apple (App Store) für Download, Kauf und Bezahlung (Abschnitt 10) und Google bzw. Apple für die Anmeldung mit Google bzw. Apple (Abschnitt 4).</p>
         <p><strong>Gemeinsam mit uns verantwortlich</strong> ist Meta für die Statistiken unserer Facebook-Seite und unseres Instagram-Profils und für die Auswahl, wem unsere Werbung angezeigt wird, und unter Umständen TikTok für die Statistiken unseres TikTok-Profils (Abschnitt 14).</p>
         <p>Darüber hinaus geben wir deine Daten nur weiter, wenn wir gesetzlich dazu verpflichtet sind, zum Beispiel an Behörden. Wir verkaufen keine Daten.</p>
 
@@ -320,7 +329,7 @@
         <h2 id="speicherdauer">17. Speicherdauer im Überblick</h2>
         <p>Wir speichern Daten nur so lange, wie wir sie für den jeweiligen Zweck brauchen oder gesetzlich aufbewahren müssen:</p>
         <ul>
-          <li><strong>Konto, Angaben aus deinem Google-Konto (bei der Anmeldung mit Google), Vorname, Favoriten, Tarif, Wochen-Rhythmus und Zeiträume deiner Wochen, Vorratsregal, Tausch-Protokoll, Belohnungen und Geschenk-Codes, Planzählung älterer Versionen:</strong> bis du dein Konto löschst. Das Tausch-Protokoll kannst du vorher im Profil zurücksetzen.</li>
+          <li><strong>Konto, Angaben aus deinem Google-Konto bzw. deiner Apple-ID (bei der Anmeldung mit Google bzw. Apple), Vorname, Favoriten, Tarif, Wochen-Rhythmus und Zeiträume deiner Wochen, Vorratsregal, Tausch-Protokoll, Belohnungen und Geschenk-Codes, Planzählung älterer Versionen:</strong> bis du dein Konto löschst. Das Tausch-Protokoll kannst du vorher im Profil zurücksetzen.</li>
           <li><strong>Angemeldete Sitzungen (IP-Adresse, Geräteart):</strong> bis du dich abmeldest oder dein Konto löschst.</li>
           <li><strong>Deine Angaben, Gesundheitsdaten, Gewichtsverlauf und Inhalt deiner Wochen:</strong> bis du die Einwilligung widerrufst oder dein Konto löschst. Von vergangenen Wochen bleibt der Inhalt der letzten zehn, vom Gewichtsverlauf bleiben höchstens 400 Einträge, von gespeicherten Plänen älterer Versionen mit Premium höchstens zehn, sonst zwei.</li>
           <li><strong>Nachweis deiner Einwilligung:</strong> bis du dein Konto löschst, auch nach einem Widerruf, damit wir Erteilung und Widerruf belegen können.</li>
@@ -374,7 +383,7 @@
 
         <h2 id="aenderungen">23. Änderungen und Stand</h2>
         <p>Wir passen diese Datenschutzerklärung an, wenn sich die App, die Website oder die rechtlichen Anforderungen ändern. Die aktuelle Fassung findest du immer hier und in der App unter Profil → Datenschutzerklärung.</p>
-        <p class="stand">Stand: 1. November 2026</p>
+        <p class="stand">Stand: 2. November 2026</p>
       </div>
     </div>
   </main>

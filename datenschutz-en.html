@@ -102,7 +102,7 @@
 
         <h2 id="ueberblick">2. The key points at a glance</h2>
         <ul>
-          <li>To use MealMyDay you need an account, with an e-mail address and password or, in the Android app, with your Google account (section 4).</li>
+          <li>To use MealMyDay you need an account, with an e-mail address and password, in the Android app also with your Google account and in the iPhone app with your Apple ID (section 4).</li>
           <li>Your data is stored on servers in Frankfurt am Main (EU).</li>
           <li>For your weekly plans we need health data such as weight, calorie goal or allergies. We store it in your account <strong>only with your explicit consent</strong>. Without this consent, MealMyDay cannot plan any weeks for you. You can withdraw it at any time (section 5).</li>
           <li>The app and this website contain <strong>no advertising, no tracking and no analytics services</strong>. We do not sell data and do not pass it on for advertising.</li>
@@ -140,7 +140,7 @@
         <p>To use MealMyDay you need an account. For this we process:</p>
         <ul>
           <li><strong>E-mail address</strong> – as your username and for confirmation and security messages,</li>
-          <li><strong>Password</strong> – only in encrypted form (as a hash value). We do not know your password in plain text. If you sign in with Google, there is no password.</li>
+          <li><strong>Password</strong> – only in encrypted form (as a hash value). We do not know your password in plain text. If you sign in with Google or Apple, there is no password.</li>
           <li><strong>Account ID</strong> – a random number under which your data is stored,</li>
           <li><strong>Timestamps</strong> of your registration, of the confirmation of your e-mail address and of your last sign-in,</li>
           <li><strong>Signed-in sessions</strong> – for each active sign-in, the IP address and the type of device or app (technical identifier of the program, “user agent”), in order to detect misuse,</li>
@@ -159,6 +159,15 @@
         <p>We store this information at Supabase with your account. We use the e-mail address in the same way as when you sign in with a password. If there is already an account with the same verified address, you are signed in to that account. During setup, the app suggests your first name for addressing you. You can change it or leave it out. The app does not display your profile picture. We have no access to other data in your Google account, such as contacts or files.</p>
         <p>For the sign-in itself, Google (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland) is an independent controller. In the process, Google learns that you are signing in to MealMyDay. The <a href="https://policies.google.com/privacy?hl=en" rel="noopener">Google Privacy Policy</a> applies. When you sign out of the app, it also signs you out with Google. You can also disconnect MealMyDay from your Google account at any time in your Google account under “Third-party apps &amp; services” (German: “Drittanbieter-Apps und -Dienste”).</p>
         <p>Legal basis: Art. 6(1)(b) GDPR. Signing in with Google is optional. You can also use MealMyDay with an e-mail address and password.</p>
+        <h3>Signing in with Apple</h3>
+        <p>In the iPhone app, you can sign in with your Apple ID instead of an e-mail address and password (“Weiter mit Apple”, Continue with Apple). You confirm this on your iPhone, for example with Face ID, and Apple confirms the sign-in to us with a signed token. In the process, we receive from Apple:</p>
+        <ul>
+          <li>an <strong>identifier</strong> that Apple issues for MealMyDay only,</li>
+          <li>an <strong>e-mail address</strong>: that of your Apple ID or, if you choose “Hide My Email”, a relay address from Apple that forwards messages to you,</li>
+          <li>only at the first sign-in and only if you share it, your <strong>name</strong>.</li>
+        </ul>
+        <p>We store this information at Supabase with your account and use it in the same way as when you sign in with Google. The free month for the waiting list is only available for the same e-mail address, so not with a relay address from Apple. For the sign-in itself, Apple (Apple Distribution International Limited, Hollyhill Industrial Estate, Hollyhill, Cork, Ireland) is an independent controller. The <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple Privacy Policy</a> applies. You can disconnect MealMyDay at any time in your iPhone settings (Apple Account → Sign-In &amp; Security → Sign in with Apple).</p>
+        <p>When you delete your account, you confirm once with Apple. With the one-time code that Apple issues for this, we ask Apple to revoke the sign-in for MealMyDay. We do not keep any sign-in data from Apple for this. Legal basis: Art. 6(1)(b) GDPR. Signing in with Apple is optional.</p>
 
         <h2 id="gesundheitsdaten">5. Your details and health data</h2>
         <p>So that MealMyDay can calculate your calorie requirements and plan your weeks to suit you, you enter the following in the app:</p>
@@ -214,7 +223,7 @@
 
         <h2 id="export">8. Data export and deleting your account</h2>
         <p>Under “Meine Daten exportieren” (Export my data) in your profile, the app loads all the data in your account and creates a PDF file from it <strong>on your device</strong>. Nothing additional is stored on our server for this. You decide whether and where you save or share the file.</p>
-        <p>Under “Konto löschen” (Delete account) in your profile, you delete your account immediately and permanently after a confirmation prompt, with all settings, consents, weeks, the swap log, the weight history, favourites, rewards and gift codes, the tier and the plan count of older versions. We also delete your customer record at RevenueCat. <strong>This does not end a running subscription</strong> – cancel it in the subscription settings of Google Play or of your Apple account. Google and Apple keep purchase receipts according to their own rules. You can also delete your account by e-mail, see <a href="konto-loeschen.html">Deleting your account and data</a>.</p>
+        <p>Under “Konto löschen” (Delete account) in your profile, you delete your account immediately and permanently after a confirmation prompt, with all settings, consents, weeks, the swap log, the weight history, favourites, rewards and gift codes, the tier and the plan count of older versions. We also delete your customer record at RevenueCat. If you signed in with Apple, we also revoke the sign-in with Apple (section 4). <strong>This does not end a running subscription</strong> – cancel it in the subscription settings of Google Play or of your Apple account. Google and Apple keep purchase receipts according to their own rules. You can also delete your account by e-mail, see <a href="konto-loeschen.html">Deleting your account and data</a>.</p>
         <p>Legal basis: Art. 6(1)(c) GDPR in conjunction with Arts. 15, 17 and 20 GDPR.</p>
 
         <h2 id="ki">9. Dishes with AI</h2>
@@ -304,7 +313,7 @@
           <dd>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. Mailbox support@jilacreatives.de. <a href="https://policies.google.com/privacy?hl=en" rel="noopener">Privacy notice</a></dd>
         </dl>
         <p><strong>Hosting of this website:</strong> GitHub Pages, GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. GitHub processes the technical access data (section 12) in accordance with its own <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">privacy statement</a>.</p>
-        <p><strong>Independent controllers</strong> are Google (Google Play) and Apple (App Store) for the download, purchase and payment (section 10), and Google for signing in with Google (section 4).</p>
+        <p><strong>Independent controllers</strong> are Google (Google Play) and Apple (App Store) for the download, purchase and payment (section 10), and Google or Apple for signing in with Google or Apple (section 4).</p>
         <p><strong>Joint controllers with us</strong> are Meta for the statistics of our Facebook page and our Instagram profile and for selecting who is shown our advertising, and possibly TikTok for the statistics of our TikTok profile (section 14).</p>
         <p>Beyond that, we only pass on your data if we are legally obliged to do so, for example to authorities. We do not sell data.</p>
 
@@ -321,7 +330,7 @@
         <h2 id="speicherdauer">17. Retention periods at a glance</h2>
         <p>We only store data for as long as we need it for the respective purpose or are legally required to keep it:</p>
         <ul>
-          <li><strong>Account, information from your Google account (when signing in with Google), first name, favourites, tier, weekly rhythm and periods of your weeks, pantry shelf, swap log, rewards and gift codes, plan count of older versions:</strong> until you delete your account. You can reset the swap log beforehand in your profile.</li>
+          <li><strong>Account, information from your Google account or Apple ID (when signing in with Google or Apple), first name, favourites, tier, weekly rhythm and periods of your weeks, pantry shelf, swap log, rewards and gift codes, plan count of older versions:</strong> until you delete your account. You can reset the swap log beforehand in your profile.</li>
           <li><strong>Signed-in sessions (IP address, device type):</strong> until you sign out or delete your account.</li>
           <li><strong>Your details, health data, weight history and content of your weeks:</strong> until you withdraw your consent or delete your account. Of past weeks, the content of the last ten is kept; of the weight history, at most 400 entries; of saved plans from older versions, at most ten with Premium, otherwise two.</li>
           <li><strong>Proof of your consent:</strong> until you delete your account, even after a withdrawal, so that we can prove that consent was given and withdrawn.</li>
@@ -375,7 +384,7 @@
 
         <h2 id="aenderungen">23. Changes and last update</h2>
         <p>We update this privacy policy when the app, the website or the legal requirements change. You can always find the current version here and in the app under “Profil” → “Datenschutzerklärung” (Profile → Privacy policy).</p>
-        <p class="stand">Last updated: 1 November 2026</p>
+        <p class="stand">Last updated: 2 November 2026</p>
       </div>
     </div>
   </main>
