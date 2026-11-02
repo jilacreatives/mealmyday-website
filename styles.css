@@ -590,7 +590,6 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 }
 @media (prefers-color-scheme: dark) { .cmp td.cmp-us::before { background-image: url("assets/schriftzug-hell.png"); } }
 .cmp td.cmp-us .ic { left: 13px; top: 14px; width: 26px; height: 26px; color: var(--green); stroke-width: 3; }
-.cmp-note { margin: 1.25rem 0 0; color: var(--muted); max-width: 70ch; }
 @media (min-width: 720px) {
   .cmp { display: table; table-layout: fixed; position: relative; z-index: 0; background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); }
   .cmp::before {
