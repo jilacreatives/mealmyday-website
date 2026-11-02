@@ -1,4 +1,4 @@
-/* MealMyDay – Kopfzeile (alle Seiten). Reines JavaScript, keine Bibliotheken, keine externen Anfragen.
+/* MealMyDay – Kopfzeile (alle Seiten) und „Mehr Fragen“ (Startseite). Reines JavaScript, keine Bibliotheken, keine externen Anfragen.
    - trägt die tatsächliche Kopfhöhe als CSS-Variable --head-h ein (für Ankersprünge und die Bühne der Startseite)
    - setzt die Klasse is-scrolled, sobald gescrollt ist (feine Linie/Schatten unter der Kopfzeile)
    - hebt den Navigationspunkt des Abschnitts hervor, in dem man gerade liest (IntersectionObserver)
@@ -81,4 +81,20 @@
   window.addEventListener('orientationchange', onResize);
   window.addEventListener('load', onResize);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(onResize);
+})();
+
+/* ---- Häufige Fragen: erst 5 zeigen, der Knopf klappt die übrigen auf und wieder zu ----
+   Ohne JavaScript bleibt der Knopf versteckt und alle Fragen sind zu sehen. */
+(function () {
+  'use strict';
+  var liste = document.getElementById('faq-liste');
+  var knopf = document.querySelector('.faq-mehr');
+  if (!liste || !knopf || !liste.querySelector('.faq-extra')) return;
+  liste.classList.add('is-kurz');
+  knopf.hidden = false;
+  knopf.addEventListener('click', function () {
+    var kurz = liste.classList.toggle('is-kurz');
+    knopf.setAttribute('aria-expanded', String(!kurz));
+    knopf.firstChild.nodeValue = kurz ? 'Mehr Fragen' : 'Weniger Fragen';
+  });
 })();

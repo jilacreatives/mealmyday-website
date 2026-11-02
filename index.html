@@ -14,9 +14,9 @@
   <meta property="og:description" content="Mahlzeitenpläne Woche für Woche, passend zu Ziel, Ernährungsweise, Allergien und deinem Einkaufstag. Mengen aufs Gramm, Kalorien, Makros und fertige Einkaufsliste.">
   <meta name="theme-color" content="#F6F4EE" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#151812" media="(prefers-color-scheme: dark)">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png?v=2">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
   <!-- nur die zwei wichtigsten Schriftdateien vorladen (Überschrift und Fließtext), der Rest kommt bei Bedarf -->
   <link rel="preload" href="fonts/plus-jakarta-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -672,7 +672,7 @@
     <!-- ===== Preise (seit 1. November 2026, Wochen-Modell): keine kostenlose Version mehr, Premium als Abo – monatlich
          6,99 € oder jährlich 39,99 € (wie ABO_PREIS in src/logic/abo.ts der App und in den Stores). Die erste Woche ist
          gratis (Gratis-Woche ohne Abo und Zahlungsdaten). Anker #kostenlos bleibt, damit alte Links funktionieren. ===== -->
-    <section class="section" id="kostenlos" aria-labelledby="kostenlos-titel">
+    <section class="section section-mitte" id="kostenlos" aria-labelledby="kostenlos-titel">
       <div class="wrap">
         <div class="section-head reveal">
           <h2 id="kostenlos-titel">Preise</h2>
@@ -712,14 +712,15 @@
       </div>
     </section>
 
-    <!-- ===== Häufige Fragen: <details>/<summary>, ohne JavaScript auf- und zuklappbar ===== -->
-    <section class="section" id="fragen" aria-labelledby="fragen-titel">
+    <!-- ===== Häufige Fragen: <details>/<summary>, ohne JavaScript auf- und zuklappbar.
+         Mit JavaScript sind erst 5 zu sehen, „Mehr Fragen“ klappt die übrigen (class faq-extra) auf (site.js). ===== -->
+    <section class="section section-mitte" id="fragen" aria-labelledby="fragen-titel">
       <div class="wrap">
         <div class="section-head reveal">
           <h2 id="fragen-titel">Häufige Fragen</h2>
           <p>Kurz beantwortet. Noch etwas offen? <a href="#kontakt">Schreib uns</a>.</p>
         </div>
-        <div class="faq">
+        <div class="faq" id="faq-liste">
           <details class="faq-item reveal" style="--i:0">
             <summary>Wie funktioniert MealMyDay?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
             <p>Du gibst dein Ziel (Abnehmen, Gewicht halten, Muskelaufbau), Körperdaten, Ernährungsweise, Allergien und deinen Einkaufstag an. Daraus berechnet die App dein Kalorienziel und deine Makros und plant Woche für Woche passende Gerichte mit genauen Mengen – die Einkaufsliste gleich dazu. Die Gerichte entwickelt eine KI; die Nährwerte berechnet die App aus dem Bundeslebensmittelschlüssel – von der KI geschätzt wird nichts.</p>
@@ -740,27 +741,28 @@
             <summary>Wie zuverlässig sind die Allergie-Filter?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
             <p>Die 14 EU-Hauptallergene und Laktose lassen sich ausschließen – Zutaten mit einem ausgeschlossenen Allergen kommen nie in deinen Plan. Prüfe trotzdem immer das Etikett: Rezepturen der Hersteller ändern sich, und Spuren kann die App nicht kennen.</p>
           </details>
-          <details class="faq-item reveal" style="--i:5">
+          <details class="faq-item faq-extra reveal" style="--i:0">
             <summary>Was kostet MealMyDay?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
             <p>Die App lädst du kostenlos herunter, und die erste Woche ist gratis: 7 Tage Premium, ohne Abo und ohne Zahlungsdaten. Danach geht es mit Premium weiter – als Abo für 6,99 € im Monat oder 39,99 € im Jahr (52 % gespart). Abgeschlossen wird über Google Play bzw. den App Store, kündigen kannst du jederzeit in den Abo-Einstellungen des Stores. Wer sich vor dem Start auf die Warteliste einträgt, bekommt einen Monat Premium gratis.</p>
           </details>
-          <details class="faq-item reveal" style="--i:6">
+          <details class="faq-item faq-extra reveal" style="--i:1">
             <summary>Was passiert nach der Gratis-Woche?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
             <p>Die Gratis-Woche endet von selbst – es läuft kein Abo weiter, und du musst nichts kündigen. Möchtest du weiterplanen, schließt du in der App ein Abo ab, monatlich oder jährlich. Ohne Abo kommen keine neuen Wochen dazu; eine schon freigeschaltete Woche kannst du aber bis zu ihrem Ende nutzen. Deine Angaben, Favoriten, vergangenen Wochen und alles, was die App über dich gelernt hat, bleiben gespeichert – mit einem Abo geht es ohne neue Einrichtung weiter.</p>
           </details>
-          <details class="faq-item reveal" style="--i:7">
+          <details class="faq-item faq-extra reveal" style="--i:2">
             <summary>Wie bekomme ich einen Monat geschenkt?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
             <p>Mit dem Vorratsregal: Hak in jeder Woche mindestens eine Zutat auf deiner Einkaufsliste ab, dann kommt ein Glas ins Regal. Nach 12 Gläsern ist es voll. Mit einem Monatsabo schenken wir dir dann einen Monat Premium, mit einem Jahresabo bekommst du einen Gratis-Monat zum Verschenken an einen Freund. Verpasst du mal eine Woche, springt einmal im Monat von selbst eine Pause-Woche ein – sonst beginnt das Regal von vorn.</p>
           </details>
-          <details class="faq-item reveal" style="--i:8">
+          <details class="faq-item faq-extra reveal" style="--i:3">
             <summary>Wie kündige ich?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
             <p>In den Abo-Einstellungen von Google Play bzw. deines Apple-Kontos – in der App kommst du über Profil → Abo → „Abo verwalten“ direkt dorthin. Premium bleibt bis zum Ende der bezahlten Laufzeit voll nutzbar, deine Wochen werden bis dahin normal freigeschaltet. Wichtig: Wenn du dein Konto löschst, endet ein Abo nicht von selbst – kündige es vorher im Store.</p>
           </details>
-          <details class="faq-item reveal" style="--i:9">
+          <details class="faq-item faq-extra reveal" style="--i:4">
             <summary>Wo liegen meine Daten?<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary>
             <p>Auf Servern in der EU (Frankfurt). Gesundheitsangaben wie Gewicht oder Allergien speichert MealMyDay nur mit deiner ausdrücklichen Einwilligung. In der App kannst du deine Daten jederzeit exportieren oder dein Konto komplett löschen.</p>
           </details>
         </div>
+        <p class="faq-mehr-zeile"><button type="button" class="btn btn-ghost faq-mehr" aria-controls="faq-liste" aria-expanded="false" hidden>Mehr Fragen<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></p>
       </div>
     </section>
 
