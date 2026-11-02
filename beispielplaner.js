@@ -3,7 +3,8 @@
    Bilder der Gerichte (assets/gerichte/, vom Skript website:beispiele der App kopiert) vom eigenen Server – erst, wenn
    der Abschnitt in die Nähe scrollt oder jemand etwas antippt. Nichts wird gesendet oder gespeichert.
    Das Ergebnis sieht aus wie „Mein Plan“ in der App: Tagesbilanz-Karte mit Kalorien, Balken und Makro-Zeilen, darunter
-   je Mahlzeit eine Karte mit dem kleinen Bild des Gerichts (ohne Bild das Symbol), Makro-Kacheln und Zutaten.
+   je Mahlzeit eine Karte mit dem kleinen Bild des Gerichts (ohne Bild das Symbol), Makro-Kacheln und den Zutaten zum
+   Aufklappen (<details>, wie die eingeklappten Karten in der App – sonst wird die Spalte am Laptop sehr lang).
    Beim ersten Hereinscrollen läuft einmal eine kurze Vorführung (drei Einstellungen tippen sich an, dann erscheint
    der Tag); sie bricht ab, sobald jemand selbst etwas antippt oder tippt. Bewegt werden nur transform und Text. */
 (function () {
@@ -102,7 +103,7 @@
   }
 
   /* ---- Ergebnis zeichnen wie „Mein Plan“: Tagesbilanz-Karte (Kalorien, Balken, drei Makro-Zeilen), dann je Mahlzeit
-          eine Karte mit Symbol, Makro-Kacheln und Zutaten; Zahl und Balken wachsen beim Zeichnen ---- */
+          eine Karte mit Symbol, Makro-Kacheln und aufklappbaren Zutaten; Zahl und Balken wachsen beim Zeichnen ---- */
   function mrow(lab, cls, ist, soll) {
     return '<div class="mrow ' + cls + '"><b>' + lab + '</b><div class="bar"><i data-w="' + (soll ? Math.min(1, ist / soll) : 1).toFixed(3) + '"></i></div><span>' + fmt(ist) + ' von ' + fmt(soll) + ' g</span></div>';
   }
@@ -123,7 +124,7 @@
           : '<span class="tile tile-green"><svg class="ic" aria-hidden="true"><use href="#i-' + (LOOK[m.bez] || 'apple') + '"/></svg></span>') +
         '<div class="meal-text"><span class="meal-typ">' + esc(m.bez) + '</span><h4 class="meal-name">' + esc(m.name) + '</h4><span class="meal-info">' + fmt(m.tot[0]) + ' kcal</span></div></div>' +
         '<div class="macros">' + kachel('m-p', m.tot[1], 'Eiweiß') + kachel('m-c', m.tot[2], 'Kohlenhydrate') + kachel('m-f', m.tot[3], 'Fett') + '</div>' +
-        '<div class="abschnitt"><b>Zutaten</b><ul class="zutaten">' + m.ings + '</ul></div></li>';
+        '<details class="bp-zutaten"><summary>Zutaten und Mengen<svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></summary><ul class="zutaten">' + m.ings + '</ul></details></li>';
     });
     h += '</ul><p class="bp-more"><button type="button" class="btn btn-ghost btn-sm" id="bp-next">Anderer Vorschlag</button><span>Vorschlag ' + (idx % t.n + 1) + ' von ' + t.n + '</span></p>';
     setze(h);

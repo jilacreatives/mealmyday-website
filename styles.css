@@ -485,18 +485,34 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 }
 @media (prefers-color-scheme: dark) { .bp-form select { background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ABB2A2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); } }
 @media (max-width: 479px) { .bp-form select { font-size: 1rem; font-weight: 500; padding-left: 10px; } }
+/* am Laptop kompakter (auf dem Handy bleiben Pillen und Felder 44 bzw. 48 px hoch zum Antippen), und die Eingaben bleiben
+   beim Scrollen stehen, solange rechts noch Mahlzeiten kommen (Wunsch des Inhabers vom 2. November 2026) */
+@media (min-width: 880px) {
+  .bp-form { gap: 12px; }
+  .bp-form legend, .bp-form .lab { margin-bottom: 5px; }
+  .seg span { min-height: 36px; padding: 5px 13px; font-size: .9rem; }
+  .bp-form input[type="text"], .bp-form select { height: 42px; font-size: 1rem; }
+}
+@media (min-width: 880px) and (min-height: 720px) { .bp-form { position: sticky; top: calc(var(--head-h, 64px) + 16px); } }
 .bp-hint { margin: 0; font-size: .88rem; color: var(--muted); font-weight: 500; }
 .bp-out { min-height: 160px; }
 .bp-msg { margin: 0; padding: 12px 16px; border-radius: var(--r-sm); background: var(--surface-2); color: var(--muted); font-weight: 600; }
 .bp-msg.is-fehler { background: var(--warn-soft); color: var(--warn); }
 .bp-msg .btn { margin-top: 8px; }
-/* Ergebnis wie „Mein Plan“ in der App: Tagesbilanz-Karte, darunter je Mahlzeit eine Karte mit Makro-Kacheln und Zutaten */
+/* Ergebnis wie „Mein Plan“ in der App: Tagesbilanz-Karte, darunter je Mahlzeit eine Karte mit Makro-Kacheln und Zutaten
+   zum Aufklappen */
 .bp-out .balance { margin: 0 0 12px; max-width: none; border: 1.5px solid var(--line); box-shadow: none; }
 .bp-out .bar i { transform: scaleX(0); }   /* beispielplaner.js zieht die Balken auf */
 .bp-out .hint { font-size: .85rem; color: var(--muted); margin: 0; }
 .bp-meals { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .bp-meal { margin: 0; animation: bp-in .5s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 80ms); border: 1.5px solid var(--line); box-shadow: none; }
 @keyframes bp-in { from { opacity: 0; transform: translateY(10px); } }
+.bp-zutaten { margin-top: 12px; padding-top: 8px; border-top: 1.5px solid var(--line); }
+.bp-zutaten summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 36px; cursor: pointer; list-style: none; font-family: var(--f-display); font-weight: 600; font-size: .95rem; color: var(--accent-text); }
+.bp-zutaten summary::-webkit-details-marker { display: none; }
+.bp-zutaten summary .ic { width: 24px; height: 24px; padding: 3px; border-radius: 50%; background: var(--green-soft); color: var(--green); stroke-width: 2.5; transition: transform .25s ease; }
+.bp-zutaten[open] summary .ic { transform: rotate(180deg); }
+.bp-zutaten .zutaten { margin-top: 6px; }
 .bp-more { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 14px 0 0; font-size: .88rem; font-weight: 600; color: var(--muted); }
 .bp-foot { margin: 14px 0 10px; color: var(--muted); }
 @media (min-width: 600px) and (max-width: 879px) { .bp-meals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -837,7 +853,7 @@ mark.ph {
    ========================================================================== */
 :root { --plate: 96px; --ing: 30px; --row-ico: 22px; }
 @media (min-width: 600px) { :root { --plate: 150px; --ing: 48px; --row-ico: 26px; } }
-@media (min-width: 1024px) { :root { --plate: 190px; --ing: 60px; --row-ico: 28px; } }
+/* ab 1024 px bleibt es bei 150 px – größer wirkten die Teller am Laptop riesig (Inhaber, 2. November 2026) */
 
 .story { position: relative; padding: 3rem 0 0; }
 html.anim .story { height: 480vh; padding: 0; }
@@ -870,7 +886,7 @@ html.anim .plates-wrap, html.anim .list-wrap { grid-area: 1 / 1; align-self: cen
 html.anim .list-wrap { opacity: 0; }
 
 /* Teller */
-.plates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 860px; margin: 0 auto; }
+.plates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 720px; margin: 0 auto; }
 @media (min-width: 600px) { .plates { gap: 24px; } }
 /* Spalte, damit Kalorien und Balken bei allen drei Tellern auf einer Höhe stehen, auch wenn ein Name länger umbricht */
 .plate { text-align: center; min-width: 0; display: flex; flex-direction: column; }
