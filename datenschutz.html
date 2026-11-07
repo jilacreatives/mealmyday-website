@@ -105,6 +105,7 @@
           <li>Deine Daten liegen auf Servern in Frankfurt am Main (EU).</li>
           <li>Für deine Wochenpläne brauchen wir Gesundheitsdaten wie Gewicht, Kalorienziel oder Allergien. In deinem Konto speichern wir sie <strong>nur mit deiner ausdrücklichen Einwilligung</strong>. Die Einwilligung ist freiwillig: Ohne sie bleiben deine Angaben und Wochen nur auf deinem Handy. Du kannst jederzeit einwilligen oder widerrufen (Abschnitt 5).</li>
           <li>Die App und diese Website enthalten <strong>keine Werbung, kein Tracking und keine Analyse-Dienste</strong>. Wir verkaufen keine Daten und geben sie nicht für Werbung weiter.</li>
+          <li>Stürzt die App ab oder läuft etwas schief, schickt sie einen technischen <strong>Fehlerbericht</strong> an Sentry (Speicherort EU), ohne deine E-Mail-Adresse, Konto-Kennung, IP-Adresse oder Gesundheitsdaten (Abschnitt 3).</li>
           <li>Für MealMyDay werben wir auf Facebook und Instagram. Von Meta bekommen wir dabei nur zusammengefasste Zahlen, keine Daten über einzelne Personen (Abschnitt 14).</li>
           <li>Unsere KI bekommt <strong>keine Daten von dir</strong>. Sie hilft uns nur vorab beim Entwerfen von Rezepten.</li>
           <li>Premium ist ein <strong>Abo</strong>, monatlich oder jährlich, über Google Play bzw. den App Store. Die erste Woche ist gratis, ohne Abo und ohne Zahlungsdaten. Deine Zahlungsdaten sehen wir nie (Abschnitt 7).</li>
@@ -132,6 +133,9 @@
         <h3>Mitteilungen</h3>
         <p>Wenn du es erlaubst, sagt dir die App Bescheid, sobald deine neue Woche freigeschaltet ist („Deine neue Woche ist fertig“), und erinnert dich am letzten Tag einer Woche an dein Vorratsregal. Die Erlaubnis fragt dein Handy einmal mit seinem eigenen Fenster ab. Abschalten kannst du die Mitteilungen jederzeit in den Einstellungen deines Handys.</p>
         <p>Die App plant die Mitteilungen <strong>auf deinem Gerät</strong> aus den Daten deiner Wochen. Dafür gehen keine Daten an uns, an Google, an Apple oder an einen anderen Push-Dienst. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</p>
+        <h3>Fehlerberichte (Sentry)</h3>
+        <p>Damit wir Abstürze und Fehler schnell finden und beheben können, schickt die App bei einem Fehler einen technischen Bericht an den Dienst Sentry. Darin stehen: die Fehlermeldung und die Stelle im Programm, wo der Fehler passiert ist, die App-Version, das System deines Handys (zum Beispiel Android 15 oder iOS 18), das Gerätemodell, der Zeitpunkt und die zuletzt geöffneten Bereiche der App. <strong>Nicht</strong> darin stehen deine E-Mail-Adresse, deine Konto-Kennung, deine IP-Adresse, dein Standort, deine Angaben oder Gesundheitsdaten und keine Bildschirmfotos. Steht in einer Fehlermeldung doch einmal eine E-Mail-Adresse oder eine Kennung, schwärzt die App sie vor dem Senden. Sentry speichert die Berichte in seiner Datenregion in der EU, die IP-Adresse der Verbindung speichert Sentry nicht, und einen Ort leitet Sentry daraus nicht ab. Wir können die Berichte dir nicht zuordnen.</p>
+        <p>Für unsere tägliche Übersicht wertet ein KI-Assistent (Claude von Anthropic) diese technischen Fehlerberichte aus. Deine Meldungen aus „Problem melden“ bekommt die KI nicht (Abschnitt 11). Sentry löscht die Fehlerberichte nach spätestens 90 Tagen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse ist es, die App stabil und fehlerfrei bereitzustellen.</p>
         <h3>Links</h3>
         <p>Links in der App, zum Beispiel zu den Quellen der Nährwerte oder zu dieser Website, öffnen sich in deinem Browser. Dort gelten die Datenschutzhinweise des jeweiligen Anbieters.</p>
         <p>Außer der Erlaubnis für Mitteilungen fragt die App keine Berechtigungen ab, also keinen Standort, keine Kamera, kein Mikrofon und keine Kontakte. Werbe-Kennungen nutzt sie nicht.</p>
@@ -228,7 +232,7 @@
 
         <h2 id="ki">9. Gerichte mit KI</h2>
         <p>Neue Rezepte entwerfen wir vorab mit Hilfe einer KI (Claude von Anthropic) und speichern sie nach einer Prüfung in unserer eigenen Rezept-Datenbank. Die Nährwerte berechnen wir nicht mit der KI, sondern aus dem Bundeslebensmittelschlüssel (BLS).</p>
-        <p><strong>Die App nutzt keine KI und schickt keine Daten von dir an eine KI.</strong> Dein Plan wird in der App aus der Rezept-Datenbank berechnet. Anthropic erhält weder deine Angaben noch deine E-Mail-Adresse.</p>
+        <p><strong>Die App nutzt keine KI und schickt keine Daten von dir an eine KI.</strong> Dein Plan wird in der App aus der Rezept-Datenbank berechnet. Anthropic erhält weder deine Angaben noch deine E-Mail-Adresse und auch nicht deine Meldungen aus „Problem melden“. Für unsere tägliche Übersicht liest die KI nur die technischen Fehlerberichte aus Sentry, die nichts enthalten, was auf dich hinweist (Abschnitt 3).</p>
 
         <h2 id="stores">10. Google Play und App Store</h2>
         <p>Die App lädst du über Google Play (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) oder den Apple App Store (Apple Distribution International Limited, Hollyhill Industrial Estate, Hollyhill, Cork, Irland) herunter. Für Download, Konto im Store, Kauf und Bezahlung sind Google bzw. Apple selbst verantwortlich. Es gelten ihre Datenschutzhinweise:</p>
@@ -240,7 +244,8 @@
 
         <h2 id="kontakt">11. Kontakt per E-Mail</h2>
         <p>Wenn du uns schreibst, verarbeiten wir deine E-Mail-Adresse, deinen Namen (falls angegeben) und den Inhalt deiner Nachricht, um dir zu antworten. Schreib uns bitte keine Gesundheitsdaten, die wir für deine Anfrage nicht brauchen.</p>
-        <p><strong>Problem melden:</strong> Über „Problem melden“ im Profil der App und im Fuß dieser Website öffnet sich dein E-Mail-Programm mit einer vorbereiteten Nachricht an support@mealmyday.app. In der App stehen darin schon die App-Version, das System deines Handys (zum Beispiel Android 15) und deine Konto-Kennung, damit wir das Problem schneller finden. Du siehst die Nachricht vor dem Senden und kannst alles ändern oder löschen. Erst wenn du sie abschickst, erhalten wir sie.</p>
+        <p><strong>Problem melden in der App:</strong> Unter Profil → „Problem melden“ beschreibst du ein Problem in einem kurzen Formular. Mit deiner Meldung speichern wir deine Konto-Kennung, den Zeitpunkt, die App-Version, das System deines Handys (zum Beispiel Android 15) und das Gerätemodell, aber keine Angaben aus deinem Profil. Die Meldung liegt in unserer Datenbank bei Supabase in Frankfurt am Main (Abschnitt 15). Jeden Morgen schickt uns der Server die neuen Meldungen per E-Mail an unser Postfach support@jilacreatives.de. <strong>Eine KI bekommt deine Meldungen nicht.</strong> Du siehst deine Meldungen im Datenexport. Wir löschen sie, wenn du dein Konto löschst, spätestens aber nach sechs Monaten. Schreib bitte nur hinein, was zum Problem gehört, und keine Gesundheitsdaten, die wir dafür nicht brauchen.</p>
+        <p><strong>Problem melden per E-Mail:</strong> Möchtest du ein Bildschirmfoto mitschicken, wählst du im Formular „Per E-Mail melden“. Im Fuß dieser Website steht derselbe Link. Dann öffnet sich dein E-Mail-Programm mit einer vorbereiteten Nachricht an support@mealmyday.app. Aus der App stehen darin schon die App-Version, das System deines Handys und deine Konto-Kennung, damit wir das Problem schneller finden. Du siehst die Nachricht vor dem Senden und kannst alles ändern oder löschen. Erst wenn du sie abschickst, erhalten wir sie.</p>
         <ul>
           <li>Mails an <strong>support@mealmyday.app</strong> liegen im Postfach bei IONOS (Deutschland).</li>
           <li>Mails an <strong>support@jilacreatives.de</strong> (siehe Impressum) liegen im Postfach bei Google Workspace (Google Ireland Limited, Irland).</li>
@@ -308,7 +313,9 @@
           <dt>RevenueCat – Verwaltung der Abos und Käufe</dt>
           <dd>RevenueCat, Inc., 1032 E Brandon Blvd #3003, Brandon, FL 33511, USA. <a href="https://www.revenuecat.com/privacy/" rel="noopener">Datenschutzhinweise</a></dd>
           <dt>IONOS – E-Mail-Postfach und Versand</dt>
-          <dd>IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland. Postfach support@mealmyday.app, Versand der Codes zur Anmeldung und der E-Mails zur Warteliste. <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noopener">Datenschutzhinweise</a></dd>
+          <dd>IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland. Postfach support@mealmyday.app, Versand der Codes zur Anmeldung, der E-Mails zur Warteliste und der täglichen E-Mail mit den Meldungen aus „Problem melden“ an uns. <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noopener">Datenschutzhinweise</a></dd>
+          <dt>Sentry – Fehlerberichte der App</dt>
+          <dd>Functional Software, Inc. (Sentry), San Francisco, USA; Vertreter in der EU: Sentry Software Netherlands B.V. Die Fehlerberichte (Abschnitt 3) werden in der Datenregion von Sentry in der EU gespeichert. <a href="https://sentry.io/privacy/" rel="noopener">Datenschutzhinweise</a></dd>
           <dt>Google Workspace – E-Mail-Postfach</dt>
           <dd>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Postfach support@jilacreatives.de. <a href="https://policies.google.com/privacy?hl=de" rel="noopener">Datenschutzhinweise</a></dd>
         </dl>
@@ -320,7 +327,7 @@
         <h2 id="drittland">16. Übermittlung in Länder außerhalb der EU</h2>
         <p>Einige Dienstleister sitzen außerhalb der EU bzw. des Europäischen Wirtschaftsraums oder können von dort auf Daten zugreifen:</p>
         <ul>
-          <li><strong>USA – GitHub, Google und Meta:</strong> Alle drei sind nach dem EU-US Data Privacy Framework zertifiziert. Für diese Unternehmen hat die EU-Kommission ein angemessenes Datenschutzniveau festgestellt (Art. 45 DSGVO). Google und Meta setzen zusätzlich Standardvertragsklauseln ein.</li>
+          <li><strong>USA – GitHub, Google, Meta und Sentry:</strong> Alle vier sind nach dem EU-US Data Privacy Framework zertifiziert. Sentry speichert die Fehlerberichte in der EU, kann aber aus den USA darauf zugreifen. Für diese Unternehmen hat die EU-Kommission ein angemessenes Datenschutzniveau festgestellt (Art. 45 DSGVO). Google und Meta setzen zusätzlich Standardvertragsklauseln ein.</li>
           <li><strong>USA – RevenueCat:</strong> Grundlage sind die Standardvertragsklauseln der EU-Kommission (Art. 46 Abs. 2 lit. c DSGVO), vereinbart in unserem Vertrag zur Auftragsverarbeitung.</li>
           <li><strong>Weitere Länder – TikTok:</strong> TikTok verarbeitet Daten nach eigenen Angaben auch in Ländern außerhalb der EU bzw. des Europäischen Wirtschaftsraums. Welche Länder das sind und auf welcher Grundlage, beschreibt TikTok in seiner <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/de" rel="noopener">Datenschutzrichtlinie</a>. Darauf haben wir keinen Einfluss.</li>
           <li><strong>Singapur – Supabase:</strong> Deine Daten werden in Frankfurt gespeichert. Supabase und seine Unterauftragnehmer können aber für Betrieb und Support aus Ländern außerhalb der EU darauf zugreifen, zum Beispiel aus Singapur oder den USA. Grundlage sind die Standardvertragsklauseln der EU-Kommission (Art. 46 Abs. 2 lit. c DSGVO).</li>
@@ -336,6 +343,8 @@
           <li><strong>Nachweis deiner Einwilligung:</strong> bis du dein Konto löschst, auch nach einem Widerruf, damit wir Erteilung und Widerruf belegen können.</li>
           <li><strong>Daten bei RevenueCat:</strong> zu deinem Konto, bis du es löschst. Zufällige Kennungen ohne Konto kann RevenueCat keiner Person zuordnen. Sie bleiben bis zum Ende unseres Vertrags mit RevenueCat gespeichert.</li>
           <li><strong>Falsch eingegebene Geschenk-Codes:</strong> ein Tag.</li>
+          <li><strong>Meldungen aus „Problem melden“:</strong> bis du dein Konto löschst, längstens sechs Monate. Die tägliche E-Mail damit in unserem Postfach behandeln wir wie E-Mails an uns.</li>
+          <li><strong>Fehlerberichte bei Sentry:</strong> spätestens 90 Tage.</li>
           <li><strong>Daten auf deinem Gerät (Abschnitt 3):</strong> die Anmeldung, bis du dich abmeldest, die PDF-Datei eines Datenexports bis zum nächsten Start der App (Abschnitt 8), alles andere, bis du die App löschst.</li>
           <li><strong>Technische Protokolle:</strong> bei Supabase wenige Tage, bei GitHub nach dessen Vorgaben.</li>
           <li><strong>Warteliste:</strong> unbestätigt 30 Tage, bestätigt bis zu deiner Abmeldung, längstens bis eine Woche nach Ablauf der drei Monate nach dem Start der App.</li>
@@ -351,7 +360,7 @@
           <li><strong>Art. 6 Abs. 1 lit. a DSGVO</strong> (Einwilligung): Warteliste und E-Mails dazu (Abschnitt 13).</li>
           <li><strong>Art. 6 Abs. 1 lit. b DSGVO</strong> (Vertrag): Konto (auch die Anmeldung mit Google bzw. Apple) und Vorname, Wochen-Rhythmus und Wochen, Tauschen und Lernen, Favoriten, Vorratsregal und Belohnungen, Mitteilungen, Abo und Käufe, Gratis-Woche, Gratis-Monat, Kontingent älterer Versionen, Anfragen zu deinem Konto.</li>
           <li><strong>Art. 6 Abs. 1 lit. c DSGVO</strong> (rechtliche Pflicht): Nachweis von Einwilligungen, Erfüllung deiner Rechte, steuerliche Aufbewahrung.</li>
-          <li><strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigtes Interesse): sicherer Betrieb von App und Website, Schutz deines Kontos, Preise und Tarif anzeigen, Statistiken der Stores, sonstige Anfragen, Nachweis von Lösch- und Auskunftsanfragen, Schutz der Geschenk-Codes vor Erraten (Abschnitt 6), Herkunft einer Anmeldung zur Warteliste (Abschnitt 13), Facebook-Seite, Instagram- und TikTok-Profil und Werbung bei Meta (Abschnitt 14).</li>
+          <li><strong>Art. 6 Abs. 1 lit. f DSGVO</strong> (berechtigtes Interesse): sicherer Betrieb von App und Website, Fehlerberichte der App (Abschnitt 3), Meldungen aus „Problem melden“, soweit sie nicht dein Konto oder einen Kauf betreffen (Abschnitt 11), Schutz deines Kontos, Preise und Tarif anzeigen, Statistiken der Stores, sonstige Anfragen, Nachweis von Lösch- und Auskunftsanfragen, Schutz der Geschenk-Codes vor Erraten (Abschnitt 6), Herkunft einer Anmeldung zur Warteliste (Abschnitt 13), Facebook-Seite, Instagram- und TikTok-Profil und Werbung bei Meta (Abschnitt 14).</li>
           <li><strong>§ 25 Abs. 2 Nr. 2 TDDDG:</strong> Speicherung auf deinem Gerät, die für die App unbedingt erforderlich ist, ohne Einwilligung auch deine Angaben und Wochen (Abschnitt 3).</li>
         </ul>
 
@@ -384,7 +393,7 @@
 
         <h2 id="aenderungen">23. Änderungen und Stand</h2>
         <p>Wir passen diese Datenschutzerklärung an, wenn sich die App, die Website oder die rechtlichen Anforderungen ändern. Die aktuelle Fassung findest du immer hier und in der App unter Profil → Datenschutzerklärung.</p>
-        <p class="stand">Stand: 3. November 2026</p>
+        <p class="stand">Stand: 7. November 2026</p>
       </div>
     </div>
   </main>

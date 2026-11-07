@@ -106,6 +106,7 @@
           <li>Your data is stored on servers in Frankfurt am Main (EU).</li>
           <li>For your weekly plans we need health data such as weight, calorie goal or allergies. We store it in your account <strong>only with your explicit consent</strong>. Consent is voluntary: without it, your details and weeks stay on your phone only. You can consent or withdraw at any time (section 5).</li>
           <li>The app and this website contain <strong>no advertising, no tracking and no analytics services</strong>. We do not sell data and do not pass it on for advertising.</li>
+          <li>If the app crashes or something goes wrong, it sends a technical <strong>error report</strong> to Sentry (stored in the EU), without your e-mail address, account ID, IP address or health data (section 3).</li>
           <li>We advertise MealMyDay on Facebook and Instagram. In doing so, we only receive aggregated figures from Meta, no data about individual people (section 14).</li>
           <li>Our AI receives <strong>no data from you</strong>. It only helps us draft recipes in advance.</li>
           <li>Premium is a <strong>subscription</strong>, monthly or yearly, via Google Play or the App Store. The first week is free, without a subscription and without payment details. We never see your payment details (section 7).</li>
@@ -133,6 +134,9 @@
         <h3>Notifications</h3>
         <p>If you allow it, the app lets you know as soon as your new week is unlocked (“Deine neue Woche ist fertig” – Your new week is ready) and reminds you of your pantry shelf on the last day of a week. Your phone asks for this permission once, in its own window. You can turn notifications off at any time in your phone's settings.</p>
         <p>The app schedules the notifications <strong>on your device</strong> from the data of your weeks. No data is sent to us, to Google, to Apple or to any other push service for this. Legal basis: Art. 6(1)(b) GDPR.</p>
+        <h3>Error reports (Sentry)</h3>
+        <p>So that we can find and fix crashes and errors quickly, the app sends a technical report to the Sentry service when an error occurs. It contains: the error message and the place in the program where the error happened, the app version, your phone's system (for example Android 15 or iOS 18), the device model, the time and the areas of the app opened last. It does <strong>not</strong> contain your e-mail address, your account ID, your IP address, your location, your details or health data, and no screenshots. If an error message does contain an e-mail address or an ID, the app blacks it out before sending. Sentry stores the reports in its data region in the EU, does not store the IP address of the connection and does not derive a location from it. We cannot link the reports to you.</p>
+        <p>For our daily overview, an AI assistant (Claude by Anthropic) evaluates these technical error reports. The AI does not receive your reports from “Problem melden” (section 11). Sentry deletes the error reports after 90 days at the latest. Legal basis: Art. 6(1)(f) GDPR. Our legitimate interest is to provide the app in a stable and error-free way.</p>
         <h3>Links</h3>
         <p>Links in the app, for example to the sources of the nutritional values or to this website, open in your browser. The privacy notices of the respective provider apply there.</p>
         <p>Apart from the permission for notifications, the app does not ask for any permissions, so no location, no camera, no microphone and no contacts. It does not use advertising identifiers.</p>
@@ -229,7 +233,7 @@
 
         <h2 id="ki">9. Dishes with AI</h2>
         <p>We draft new recipes in advance with the help of an AI (Claude by Anthropic) and, after a review, store them in our own recipe database. We do not calculate the nutritional values with the AI, but from the German Nutrient Database (Bundeslebensmittelschlüssel, BLS).</p>
-        <p><strong>The app does not use AI and does not send any of your data to an AI.</strong> Your plan is calculated in the app from the recipe database. Anthropic receives neither your details nor your e-mail address.</p>
+        <p><strong>The app does not use AI and does not send any of your data to an AI.</strong> Your plan is calculated in the app from the recipe database. Anthropic receives neither your details nor your e-mail address, nor your reports from “Problem melden”. For our daily overview, the AI only reads the technical error reports from Sentry, which contain nothing that points to you (section 3).</p>
 
         <h2 id="stores">10. Google Play and App Store</h2>
         <p>You download the app via Google Play (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland) or the Apple App Store (Apple Distribution International Limited, Hollyhill Industrial Estate, Hollyhill, Cork, Ireland). Google and Apple are themselves responsible for the download, your store account, the purchase and payment. Their privacy notices apply:</p>
@@ -241,7 +245,8 @@
 
         <h2 id="kontakt">11. Contact by e-mail</h2>
         <p>If you write to us, we process your e-mail address, your name (if provided) and the content of your message in order to reply to you. Please do not send us any health data that we do not need for your request.</p>
-        <p><strong>Report a problem:</strong> Via “Problem melden” (Report a problem) in the app's profile and in the footer of this website, your e-mail program opens with a prepared message to support@mealmyday.app. In the app, this message already contains the app version, your phone's system (for example Android 15) and your account ID, so that we can find the problem faster. You see the message before sending it and can change or delete anything in it. We only receive it once you send it.</p>
+        <p><strong>Report a problem in the app:</strong> Under Profil → “Problem melden” (Report a problem) you describe a problem in a short form. With your report, we store your account ID, the time, the app version, your phone's system (for example Android 15) and the device model, but no details from your profile. The report is kept in our database at Supabase in Frankfurt am Main (section 15). Every morning, the server sends us the new reports by e-mail to our mailbox support@jilacreatives.de. <strong>An AI does not receive your reports.</strong> You can see your reports in the data export. We delete them when you delete your account, but at the latest after six months. Please only write what belongs to the problem, and no health data that we do not need for it.</p>
+        <p><strong>Report a problem by e-mail:</strong> If you want to include a screenshot, choose “Per E-Mail melden” (report by e-mail) in the form; the same link is in the footer of this website. Your e-mail program then opens with a prepared message to support@mealmyday.app. From the app, this message already contains the app version, your phone's system and your account ID, so that we can find the problem faster. You see the message before sending it and can change or delete anything in it. We only receive it once you send it.</p>
         <ul>
           <li>E-mails to <strong>support@mealmyday.app</strong> are stored in the mailbox at IONOS (Germany).</li>
           <li>E-mails to <strong>support@jilacreatives.de</strong> (see legal notice) are stored in the mailbox at Google Workspace (Google Ireland Limited, Ireland).</li>
@@ -309,7 +314,9 @@
           <dt>RevenueCat – management of subscriptions and purchases</dt>
           <dd>RevenueCat, Inc., 1032 E Brandon Blvd #3003, Brandon, FL 33511, USA. <a href="https://www.revenuecat.com/privacy/" rel="noopener">Privacy notice</a></dd>
           <dt>IONOS – e-mail mailbox and sending</dt>
-          <dd>IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Germany. Mailbox support@mealmyday.app, sending of the sign-in codes and of the waitlist e-mails. <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noopener">Privacy notice</a></dd>
+          <dd>IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Germany. Mailbox support@mealmyday.app, sending of the sign-in codes, of the waitlist e-mails and of the daily e-mail with the reports from “Problem melden” to us. <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noopener">Privacy notice</a></dd>
+          <dt>Sentry – error reports of the app</dt>
+          <dd>Functional Software, Inc. (Sentry), San Francisco, USA; representative in the EU: Sentry Software Netherlands B.V. The error reports (section 3) are stored in Sentry's data region in the EU. <a href="https://sentry.io/privacy/" rel="noopener">Privacy notice</a></dd>
           <dt>Google Workspace – e-mail mailbox</dt>
           <dd>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. Mailbox support@jilacreatives.de. <a href="https://policies.google.com/privacy?hl=en" rel="noopener">Privacy notice</a></dd>
         </dl>
@@ -321,7 +328,7 @@
         <h2 id="drittland">16. Transfers to countries outside the EU</h2>
         <p>Some service providers are based outside the EU or the European Economic Area, or can access data from there:</p>
         <ul>
-          <li><strong>USA – GitHub, Google and Meta:</strong> All three are certified under the EU-US Data Privacy Framework. For these companies, the European Commission has determined an adequate level of data protection (Art. 45 GDPR). Google and Meta additionally use standard contractual clauses.</li>
+          <li><strong>USA – GitHub, Google, Meta and Sentry:</strong> All four are certified under the EU-US Data Privacy Framework. Sentry stores the error reports in the EU but can access them from the USA. For these companies, the European Commission has determined an adequate level of data protection (Art. 45 GDPR). Google and Meta additionally use standard contractual clauses.</li>
           <li><strong>USA – RevenueCat:</strong> The basis is the European Commission's standard contractual clauses (Art. 46(2)(c) GDPR), agreed in our data processing agreement.</li>
           <li><strong>Other countries – TikTok:</strong> According to its own information, TikTok also processes data in countries outside the EU or the European Economic Area. TikTok describes which countries these are and on what basis in its <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en" rel="noopener">privacy policy</a>. We have no influence on this.</li>
           <li><strong>Singapore – Supabase:</strong> Your data is stored in Frankfurt. However, Supabase and its sub-processors may access it from countries outside the EU for operations and support, for example from Singapore or the USA. The basis is the European Commission's standard contractual clauses (Art. 46(2)(c) GDPR).</li>
@@ -337,6 +344,8 @@
           <li><strong>Proof of your consent:</strong> until you delete your account, even after a withdrawal, so that we can prove that consent was given and withdrawn.</li>
           <li><strong>Data at RevenueCat:</strong> data linked to your account, until you delete it. RevenueCat cannot link random identifiers without an account to any person. They remain stored until the end of our contract with RevenueCat.</li>
           <li><strong>Incorrectly entered gift codes:</strong> one day.</li>
+          <li><strong>Reports from “Problem melden”:</strong> until you delete your account, at most six months. We treat the daily e-mail with them in our mailbox like e-mails to us.</li>
+          <li><strong>Error reports at Sentry:</strong> 90 days at the latest.</li>
           <li><strong>Data on your device (section 3):</strong> the sign-in until you sign out, the PDF file of a data export until the next start of the app (section 8), everything else until you delete the app.</li>
           <li><strong>Technical logs:</strong> at Supabase a few days, at GitHub according to its own rules.</li>
           <li><strong>Waitlist:</strong> unconfirmed 30 days, confirmed until you unsubscribe, at the latest until one week after the end of the three months following the app's launch.</li>
@@ -352,7 +361,7 @@
           <li><strong>Art. 6(1)(a) GDPR</strong> (consent): waitlist and the related e-mails (section 13).</li>
           <li><strong>Art. 6(1)(b) GDPR</strong> (contract): account (including signing in with Google or Apple) and first name, weekly rhythm and weeks, swapping and learning, favourites, pantry shelf and rewards, notifications, subscription and purchases, free week, free month, quota for older versions, requests about your account.</li>
           <li><strong>Art. 6(1)(c) GDPR</strong> (legal obligation): proof of consent, fulfilment of your rights, retention for tax purposes.</li>
-          <li><strong>Art. 6(1)(f) GDPR</strong> (legitimate interest): secure operation of the app and website, protection of your account, displaying prices and tier, store statistics, other requests, proof of deletion and access requests, protecting gift codes against guessing (section 6), source of a waitlist sign-up (section 13), Facebook page, Instagram and TikTok profiles and advertising on Meta (section 14).</li>
+          <li><strong>Art. 6(1)(f) GDPR</strong> (legitimate interest): secure operation of the app and website, error reports of the app (section 3), reports from “Problem melden” where they do not concern your account or a purchase (section 11), protection of your account, displaying prices and tier, store statistics, other requests, proof of deletion and access requests, protecting gift codes against guessing (section 6), source of a waitlist sign-up (section 13), Facebook page, Instagram and TikTok profiles and advertising on Meta (section 14).</li>
           <li><strong>Section 25(2) no. 2 TDDDG:</strong> storage on your device that is strictly necessary for the app, without consent also your details and weeks (section 3).</li>
         </ul>
 
@@ -385,7 +394,7 @@
 
         <h2 id="aenderungen">23. Changes and last update</h2>
         <p>We update this privacy policy when the app, the website or the legal requirements change. You can always find the current version here and in the app under “Profil” → “Datenschutzerklärung” (Profile → Privacy policy).</p>
-        <p class="stand">Last updated: 3 November 2026</p>
+        <p class="stand">Last updated: 7 November 2026</p>
       </div>
     </div>
   </main>
