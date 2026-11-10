@@ -42,7 +42,7 @@
         </ul>
       </nav>
       <!-- bis zum Start „Warteliste“, danach wieder „App holen“ -->
-      <a class="btn btn-primary btn-sm head-cta" href="index.html#app-holen">Waitlist</a>
+      <a class="btn btn-primary btn-sm head-cta" href="index.html#app-holen">Get the app</a>
     </div>
   </header>
 
@@ -70,7 +70,7 @@
             <li><a href="#plaene">Weeks, swapping and pantry shelf</a></li>
             <li><a href="#abos">Subscription and purchases</a></li>
             <li><a href="#export">Data export and deleting your account</a></li>
-            <li><a href="#ki">Dishes with AI</a></li>
+            <li><a href="#ki">AI and recipe import</a></li>
             <li><a href="#stores">Google Play and App Store</a></li>
             <li><a href="#kontakt">Contact by e-mail</a></li>
             <li><a href="#website">This website</a></li>
@@ -108,7 +108,7 @@
           <li>The app and this website contain <strong>no advertising, no tracking and no analytics services</strong>. We do not sell data and do not pass it on for advertising.</li>
           <li>If the app crashes or something goes wrong, it sends a technical <strong>error report</strong> to Sentry (stored in the EU), without your e-mail address, account ID, IP address or health data (section 3).</li>
           <li>We advertise MealMyDay on Facebook and Instagram. In doing so, we only receive aggregated figures from Meta, no data about individual people (section 14).</li>
-          <li>Our AI receives <strong>no data from you</strong>. It only helps us draft recipes in advance.</li>
+          <li>We store your own dishes and their photos in your account, visible only to you (section 6). If you import a recipe (link, text or screenshot), an AI (Claude by Anthropic) reads it for you. The AI <strong>never</strong> receives your details or health data (section 9).</li>
           <li>Premium is a <strong>subscription</strong>, monthly or yearly, via Google Play or the App Store. The first week is free, without a subscription and without payment details. We never see your payment details (section 7).</li>
           <li>You only get notifications if you allow them on your phone. The app schedules them on your device, so nothing is sent to a push service (section 3).</li>
           <li>You can export your data in the app as a PDF, and you delete your account yourself in the app.</li>
@@ -139,7 +139,7 @@
         <p>For our daily overview, an AI assistant (Claude by Anthropic) evaluates these technical error reports. The AI does not receive your reports from “Problem melden” (section 11). Sentry deletes the error reports after 90 days at the latest. Legal basis: Art. 6(1)(f) GDPR. Our legitimate interest is to provide the app in a stable and error-free way.</p>
         <h3>Links</h3>
         <p>Links in the app, for example to the sources of the nutritional values or to this website, open in your browser. The privacy notices of the respective provider apply there.</p>
-        <p>Apart from the permission for notifications, the app does not ask for any permissions, so no location, no camera, no microphone and no contacts. It does not use advertising identifiers.</p>
+        <p>The app asks for permission for notifications. It only asks for the camera or photos when you yourself want to add a photo to one of your own dishes or select a screenshot of a recipe (sections 6 and 9) – and it only accesses the picture you take or select. It does not ask for location, microphone or contacts. It does not use advertising identifiers.</p>
 
         <h2 id="konto">4. Account and sign-in</h2>
         <p>To use MealMyDay you need an account. For this we process:</p>
@@ -205,6 +205,8 @@
           <li><strong>Swapping and learning:</strong> When you swap a dish, we store which dish you swapped out, its main ingredients and when. From this, the app learns which dishes it should no longer suggest to you and which ingredients it should suggest less often. We also store anything you allow again under “Was die App über dich gelernt hat” (What the app has learned about you). This is not health data. We keep the last 500 swaps in the log; “Alles zurücksetzen” (Reset everything) in your profile deletes it. Legal basis: Art. 6(1)(b) GDPR.</li>
           <li><strong>Favourites:</strong> name, type and calories of the dishes you save with “Merken” (Save). The app suggests them to you a little more often. Legal basis: Art. 6(1)(b) GDPR.</li>
           <li><strong>Pantry shelf and rewards:</strong> Your pantry shelf is based on your weeks. When it is full, we store which reward you redeemed and until when it is valid (section 7). With a yearly subscription you get a gift code for a friend: we store the code, until when it is valid and whether and when it was redeemed. We store who redeemed it only internally, so that it cannot be used twice. You cannot see this, and your friend cannot see who the code came from. If you share the code via “Teilen” (Share), you decide with whom and via which app. To prevent anyone from guessing codes, we store only the account and the time of incorrectly entered codes and delete this after one day. Legal basis: Art. 6(1)(b) GDPR; for the failed attempts, Art. 6(1)(f) GDPR. Our legitimate interest is to prevent misuse.</li>
+          <li><strong>My dishes (“Meine Gerichte”):</strong> recipes you create or import yourself: name, type, servings, ingredients with amounts (including your own ingredients with their nutritional values and allergens), preparation, minutes and, if you like, a source (for example the link to a post). The app plans them into your weeks and adjusts the amounts to your goal. This is not health data, so we store it in your account even without consent, up to 200 dishes. Legal basis: Art. 6(1)(b) GDPR.</li>
+          <li><strong>Photos of your dishes:</strong> If you add a photo to one of your own dishes (camera or gallery), the app crops it, reduces its size and uploads it to private storage at Supabase in Frankfurt (section 15). Only you can see it; the app shows it via addresses that are valid for one day. We use it for nothing else. If you delete the photo or the dish, we delete the photo. Legal basis: Art. 6(1)(b) GDPR.</li>
           <li><strong>Older app versions:</strong> Before the week model, MealMyDay created individual plans. For app versions that still work this way, we store the time, length and tier (not the content) of each plan created, in order to check the number of new plans, and, with your consent, your most recently used plans (at most ten with Premium, otherwise two). Legal basis: Art. 6(1)(b) GDPR; for the plans, Art. 9(2)(a) and Art. 6(1)(a) GDPR.</li>
         </ul>
 
@@ -228,12 +230,21 @@
 
         <h2 id="export">8. Data export and deleting your account</h2>
         <p>Under “Meine Daten exportieren” (Export my data) in your profile, the app loads the data in your account, including the information Google or Apple sent us when you signed in (without consent also, marked as such, your details, your weight history and the content of your weeks from your phone), and creates a PDF file from it <strong>on your device</strong>. The app cannot retrieve your active sessions (IP address, device type) or a waitlist entry – we will tell you about these on request by e-mail. Nothing additional is stored on our server for the export. The file remains in the app's cache until you create the next export, restart the app, sign out or delete your account. You decide whether and where you save or share it before then.</p>
-        <p>Under “Konto löschen” (Delete account) in your profile, you delete your account immediately and permanently after a confirmation prompt, with all settings, consents, weeks, the swap log, the weight history, favourites, rewards and gift codes, the tier and the plan count of older versions. The app also deletes everything it has stored for your account on your phone. We also delete your customer record at RevenueCat. If you signed in with Apple, we also revoke the sign-in with Apple (section 4). <strong>This does not end a running subscription</strong> – cancel it in the subscription settings of Google Play or of your Apple account. Google and Apple keep purchase receipts according to their own rules. “Konto löschen” does not delete a waitlist entry (section 13) – use the unsubscribe link in our e-mails or write to us. You can also delete your account by e-mail, see <a href="konto-loeschen.html">Deleting your account and data</a>.</p>
+        <p>Under “Konto löschen” (Delete account) in your profile, you delete your account immediately and permanently after a confirmation prompt, with all settings, consents, weeks, the swap log, the weight history, favourites, your own dishes and their photos, the log of your recipe imports, rewards and gift codes, the tier and the plan count of older versions. The app also deletes everything it has stored for your account on your phone. We also delete your customer record at RevenueCat. If you signed in with Apple, we also revoke the sign-in with Apple (section 4). <strong>This does not end a running subscription</strong> – cancel it in the subscription settings of Google Play or of your Apple account. Google and Apple keep purchase receipts according to their own rules. “Konto löschen” does not delete a waitlist entry (section 13) – use the unsubscribe link in our e-mails or write to us. You can also delete your account by e-mail, see <a href="konto-loeschen.html">Deleting your account and data</a>.</p>
         <p>Legal basis: Art. 6(1)(c) GDPR in conjunction with Arts. 15, 17 and 20 GDPR.</p>
 
-        <h2 id="ki">9. Dishes with AI</h2>
-        <p>We draft new recipes in advance with the help of an AI (Claude by Anthropic) and, after a review, store them in our own recipe database. We do not calculate the nutritional values with the AI, but from the German Nutrient Database (Bundeslebensmittelschlüssel, BLS).</p>
-        <p><strong>The app does not use AI and does not send any of your data to an AI.</strong> Your plan is calculated in the app from the recipe database. Anthropic receives neither your details nor your e-mail address, nor your reports from “Problem melden”. For our daily overview, the AI only reads the technical error reports from Sentry, which contain nothing that points to you (section 3).</p>
+        <h2 id="ki">9. AI and recipe import</h2>
+        <p>We draft new recipes for our recipe database in advance with the help of an AI (Claude by Anthropic) and store them after a review. We do not calculate the nutritional values with the AI, but from the German Nutrient Database (Bundeslebensmittelschlüssel, BLS). Your plan is calculated in the app from the recipe database – the AI receives no data from you for this.</p>
+        <h3>Importing a recipe</h3>
+        <p>Under “Meine Gerichte” (My dishes) you can import a recipe: with a link (for example to a post on Instagram or TikTok or to a recipe page), with copied text or with a screenshot – directly in the app or via “Share” from another app. This is what happens:</p>
+        <ul>
+          <li>For a link, our server (Supabase, Frankfurt) retrieves the public page without signing in and takes the recipe from it, or the title and description – for Instagram and TikTok, the caption of the post. We do not take videos, audio, comments or photos of the post.</li>
+          <li>Our server sends this text, your copied text or your screenshot to Claude (Anthropic), together with the list of our foods. The AI reads the name, servings, ingredients with amounts and preparation. We do <strong>not</strong> send your e-mail address, your account ID, your details or health data. Please only send recipes – no pictures or texts with information about yourself or others.</li>
+          <li>You see the result in the form and check it. Nothing is stored until you save it (My dishes, section 6). We only store the link if you keep it as the source. We do not store the text or the screenshot.</li>
+          <li>Anthropic processes the data on our behalf (section 15), in the USA (section 16), states that it does not use it to train its AI and deletes it within 30 days – longer only if a request appears to violate Anthropic's usage policies (then up to two years), or if the law requires it.</li>
+          <li>So that we can check the limit of 20 imports per month and keep an eye on the costs, we store for each import only the time, the way (link, text or screenshot) and what it cost – no content – and delete this after 62 days.</li>
+        </ul>
+        <p>Legal basis: Art. 6(1)(b) GDPR (you use the feature to bring a recipe into the app). Anthropic does not receive your reports from “Problem melden”. For our daily overview, the AI also reads the technical error reports from Sentry, which contain nothing that points to you (section 3).</p>
 
         <h2 id="stores">10. Google Play and App Store</h2>
         <p>You download the app via Google Play (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland) or the Apple App Store (Apple Distribution International Limited, Hollyhill Industrial Estate, Hollyhill, Cork, Ireland). Google and Apple are themselves responsible for the download, your store account, the purchase and payment. Their privacy notices apply:</p>
@@ -265,7 +276,7 @@
         </ul>
 
         <h2 id="warteliste">13. Waitlist</h2>
-        <p>On the home page you can sign up for the waitlist with your e-mail address. We will then send you an e-mail with your free month of Premium when the app launches. We will not send you any other promotional e-mails or a newsletter.</p>
+        <p>Until 10 November 2026 you could sign up for the waitlist on the home page with your e-mail address; since then we no longer accept new sign-ups. For earlier entries, the following still applies: We will then send you an e-mail with your free month of Premium when the app launches. We will not send you any other promotional e-mails or a newsletter.</p>
         <p>The <strong>legal basis</strong> is your consent (Art. 6(1)(a) GDPR). We use <strong>double opt-in</strong>: after signing up, you receive an e-mail with a confirmation link. Only when you click it are you on the list.</p>
         <p><strong>We store:</strong></p>
         <ul>
@@ -309,7 +320,7 @@
         <h2 id="empfaenger">15. Service providers and recipients</h2>
         <p>These service providers process data <strong>on our behalf</strong> and only on our instructions, on the basis of a data processing agreement under Art. 28 GDPR:</p>
         <dl>
-          <dt>Supabase – database, sign-in, server functions (for example unlocking weeks and rewards), waitlist</dt>
+          <dt>Supabase – database, sign-in, private storage for the photos of your dishes, server functions (for example unlocking weeks, rewards and recipe import), waitlist</dt>
           <dd>Supabase Pte. Ltd., 65 Chulia Street #38-02/03, OCBC Centre, Singapore 049513. The data is stored in a data centre in Frankfurt am Main (Amazon Web Services as sub-processor). Supabase stores technical logs (for example IP address, time, function called) and deletes them automatically after a few days. <a href="https://supabase.com/privacy" rel="noopener">Privacy notice</a></dd>
           <dt>RevenueCat – management of subscriptions and purchases</dt>
           <dd>RevenueCat, Inc., 1032 E Brandon Blvd #3003, Brandon, FL 33511, USA. <a href="https://www.revenuecat.com/privacy/" rel="noopener">Privacy notice</a></dd>
@@ -317,6 +328,8 @@
           <dd>IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Germany. Mailbox support@mealmyday.app, sending of the sign-in codes, of the waitlist e-mails and of the daily e-mail with the reports from “Problem melden” to us. <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" rel="noopener">Privacy notice</a></dd>
           <dt>Sentry – error reports of the app</dt>
           <dd>Functional Software, Inc. (Sentry), San Francisco, USA; representative in the EU: Sentry Software Netherlands B.V. The error reports (section 3) are stored in Sentry's data region in the EU. <a href="https://sentry.io/privacy/" rel="noopener">Privacy notice</a></dd>
+          <dt>Anthropic – reading imported recipes (AI)</dt>
+          <dd>Anthropic Ireland, Limited, 6th Floor, South Bank House, Barrow Street, Dublin 4, D04 TR29, Ireland. Processing takes place in the USA (section 16). Anthropic does not use the data for training and deletes it within 30 days; exceptions in section 9. <a href="https://www.anthropic.com/legal/privacy" rel="noopener">Privacy policy</a></dd>
           <dt>Google Workspace – e-mail mailbox</dt>
           <dd>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland. Mailbox support@jilacreatives.de. <a href="https://policies.google.com/privacy?hl=en" rel="noopener">Privacy notice</a></dd>
         </dl>
@@ -330,6 +343,7 @@
         <ul>
           <li><strong>USA – GitHub, Google, Meta and Sentry:</strong> All four are certified under the EU-US Data Privacy Framework. Sentry stores the error reports in the EU but can access them from the USA. For these companies, the European Commission has determined an adequate level of data protection (Art. 45 GDPR). Google and Meta additionally use standard contractual clauses.</li>
           <li><strong>USA – RevenueCat:</strong> The basis is the European Commission's standard contractual clauses (Art. 46(2)(c) GDPR), agreed in our data processing agreement.</li>
+          <li><strong>USA – Anthropic:</strong> The basis is the European Commission's standard contractual clauses (Art. 46(2)(c) GDPR), agreed in Anthropic's data processing agreement.</li>
           <li><strong>Other countries – TikTok:</strong> According to its own information, TikTok also processes data in countries outside the EU or the European Economic Area. TikTok describes which countries these are and on what basis in its <a href="https://www.tiktok.com/legal/page/eea/privacy-policy/en" rel="noopener">privacy policy</a>. We have no influence on this.</li>
           <li><strong>Singapore – Supabase:</strong> Your data is stored in Frankfurt. However, Supabase and its sub-processors may access it from countries outside the EU for operations and support, for example from Singapore or the USA. The basis is the European Commission's standard contractual clauses (Art. 46(2)(c) GDPR).</li>
         </ul>
@@ -344,6 +358,8 @@
           <li><strong>Proof of your consent:</strong> until you delete your account, even after a withdrawal, so that we can prove that consent was given and withdrawn.</li>
           <li><strong>Data at RevenueCat:</strong> data linked to your account, until you delete it. RevenueCat cannot link random identifiers without an account to any person. They remain stored until the end of our contract with RevenueCat.</li>
           <li><strong>Incorrectly entered gift codes:</strong> one day.</li>
+          <li><strong>My dishes and their photos:</strong> until you delete them or your account.</li>
+          <li><strong>Recipe imports:</strong> with us only time, way and cost, 62 days; at Anthropic the request at most 30 days, longer in exceptional cases (section 9).</li>
           <li><strong>Reports from “Problem melden”:</strong> until you delete your account, at most six months. We treat the daily e-mail with them in our mailbox like e-mails to us.</li>
           <li><strong>Error reports at Sentry:</strong> 90 days at the latest.</li>
           <li><strong>Data on your device (section 3):</strong> the sign-in until you sign out, the PDF file of a data export until the next start of the app (section 8), everything else until you delete the app.</li>
@@ -359,7 +375,7 @@
         <ul>
           <li><strong>Art. 6(1)(a) and Art. 9(2)(a) GDPR</strong> (explicit consent): your details, health data, weight history, content of your weeks and saved plans from older versions in your account (sections 5 and 6).</li>
           <li><strong>Art. 6(1)(a) GDPR</strong> (consent): waitlist and the related e-mails (section 13).</li>
-          <li><strong>Art. 6(1)(b) GDPR</strong> (contract): account (including signing in with Google or Apple) and first name, weekly rhythm and weeks, swapping and learning, favourites, pantry shelf and rewards, notifications, subscription and purchases, free week, free month, quota for older versions, requests about your account.</li>
+          <li><strong>Art. 6(1)(b) GDPR</strong> (contract): account (including signing in with Google or Apple) and first name, weekly rhythm and weeks, swapping and learning, favourites, my dishes with their photos and the recipe import, pantry shelf and rewards, notifications, subscription and purchases, free week, free month, quota for older versions, requests about your account.</li>
           <li><strong>Art. 6(1)(c) GDPR</strong> (legal obligation): proof of consent, fulfilment of your rights, retention for tax purposes.</li>
           <li><strong>Art. 6(1)(f) GDPR</strong> (legitimate interest): secure operation of the app and website, error reports of the app (section 3), reports from “Problem melden” where they do not concern your account or a purchase (section 11), protection of your account, displaying prices and tier, store statistics, other requests, proof of deletion and access requests, protecting gift codes against guessing (section 6), source of a waitlist sign-up (section 13), Facebook page, Instagram and TikTok profiles and advertising on Meta (section 14).</li>
           <li><strong>Section 25(2) no. 2 TDDDG:</strong> storage on your device that is strictly necessary for the app, without consent also your details and weeks (section 3).</li>
@@ -394,7 +410,7 @@
 
         <h2 id="aenderungen">23. Changes and last update</h2>
         <p>We update this privacy policy when the app, the website or the legal requirements change. You can always find the current version here and in the app under “Profil” → “Datenschutzerklärung” (Profile → Privacy policy).</p>
-        <p class="stand">Last updated: 7 November 2026</p>
+        <p class="stand">Last updated: 10 November 2026</p>
       </div>
     </div>
   </main>

@@ -696,8 +696,9 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 }
 @media (min-width: 880px) {
   .getapp {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); grid-template-rows: auto 1fr;
-    grid-template-areas: "text liste" "kontakt liste"; padding: 32px; gap: 28px;
+    /* seit dem 10. November 2026 ohne Warteliste: Text und Kontakt nebeneinander */
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    grid-template-areas: "text kontakt"; padding: 32px; gap: 28px;
   }
 }
 .getapp-text { grid-area: text; }
