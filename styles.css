@@ -272,6 +272,7 @@ a, button, summary { touch-action: manipulation; }
 .hero { position: relative; overflow: hidden; text-align: center; padding: 150px 0 2.5rem; }
 .hero-inner { position: relative; z-index: 1; max-width: 640px; margin-inline: auto; }
 .hero h1 { margin-bottom: .45em; }
+.hero h1 .ziel { color: var(--accent-text); }
 .hero .lead { margin-inline: auto; margin-bottom: 1.5rem; }
 .hero .store-btns { justify-content: center; }
 .hero-note { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin: 1.5rem 0 0; padding: 0; list-style: none; color: var(--muted); font-weight: 700; font-size: .92rem; }
