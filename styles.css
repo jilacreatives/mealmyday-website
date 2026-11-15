@@ -274,7 +274,7 @@ a, button, summary { touch-action: manipulation; }
 .hero h1 { margin-bottom: .45em; }
 .hero h1 .ziel { color: var(--accent-text); }
 .hero .lead { margin-inline: auto; margin-bottom: 1.5rem; }
-.hero .store-btns { justify-content: center; }
+.hero .store-badges { justify-content: center; }
 .hero-note { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin: 1.5rem 0 0; padding: 0; list-style: none; color: var(--muted); font-weight: 700; font-size: .92rem; }
 .hero-note li { display: inline-flex; align-items: center; gap: 6px; margin: 0; }
 .hero-note .ic { width: 18px; height: 18px; color: var(--green); }
@@ -303,12 +303,6 @@ a, button, summary { touch-action: manipulation; }
 .hero-wl .wl-ds { margin: 8px 0 0; font-size: .85rem; color: var(--muted); }
 .hero-wl .wl-status { margin-top: 0; text-align: left; }
 .hero-wl .wl-form:not([hidden]) + .wl-status { margin-top: 12px; }
-/* Store-Knöpfe im Einstieg kleiner und nebeneinander – bis zum Start zählt die Warteliste darüber */
-.hero .store-btns { gap: 8px; flex-wrap: nowrap; }
-.hero .store-btn { min-width: 0; padding: 6px 14px 6px 10px; gap: 8px; border-radius: 13px; }
-.hero .store-btn .ic-store { width: 22px; height: 22px; }
-.hero .store-btn small { font-size: .6rem; }
-.hero .store-btn b { font-size: .95rem; }
 
 /* Zutaten-Illustrationen: Positionen je Gerät über --mx/--my (Handy) und --dx/--dy (ab 880 px) */
 .ings { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
@@ -342,26 +336,17 @@ a, button, summary { touch-action: manipulation; }
 @keyframes pop-in { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .ing, .ing svg { animation: none; } }
 
-/* ---------- Store-Knöpfe ----------
-   Solange die App nicht live ist: <a class="store-btn is-soon" aria-disabled="true"> ohne href.
-   Zum Freischalten: href="…" eintragen, is-soon und aria-disabled entfernen, den kleinen Text ändern. */
-.store-btns { display: flex; flex-wrap: wrap; gap: 12px; }
-.store-btn {
-  display: inline-flex; align-items: center; gap: 12px; min-width: 196px;
-  padding: 10px 20px 10px 14px; border-radius: var(--r-btn);
-  background: var(--ink); color: var(--bg); text-decoration: none; text-align: left;
-  transition: transform .1s ease, opacity .15s ease;
-}
-.store-btn:hover { opacity: .92; }
-.store-btn:active { transform: scale(.97); opacity: 1; }
-.store-btn .ic-store { width: 30px; height: 30px; flex: none; }
-.store-btn small { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; opacity: .8; line-height: 1.2; }
-.store-btn b { display: block; font-family: var(--f-display); font-weight: 600; font-size: 1.15rem; line-height: 1.15; }
-/* bis zum Start: flach und gedämpft, wie in der App ein gesperrter Knopf */
-.store-btn.is-soon { background: var(--surface); border: 1.5px solid var(--line); color: var(--muted); cursor: default; }
-.store-btn.is-soon:hover { opacity: 1; }
-.store-btn.is-soon:active { transform: none; }
-.store-btn.is-soon .ic-store { color: var(--muted); }
+/* ---------- Store-Badges (seit dem 15. November 2026 live) ----------
+   Offizielle Abzeichen, unverändert. Apple: SVG 119,7 × 40. Google: PNG 646 × 250 mit je 29 px durchsichtigem Rand oben
+   und unten – deshalb größer und mit negativem Rand, damit beide sichtbar gleich hoch sind (--bh). Freiraum rundherum
+   mindestens ein Viertel der Höhe (Apple- und Google-Vorgaben). */
+.store-badges { --bh: 48px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; }
+.store-badges a { display: inline-flex; line-height: 0; border-radius: 10px; transition: transform .1s ease, opacity .15s ease; }
+.store-badges a:hover { opacity: .9; }
+.store-badges a:active { transform: scale(.97); }
+.store-badges a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.store-badges .badge-apple img { height: var(--bh); width: auto; }
+.store-badges .badge-google img { height: calc(var(--bh) * 250 / 192); width: auto; margin: calc(var(--bh) * -29 / 192) 0; }
 
 /* ---------- Karten und Raster ---------- */
 .card { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); padding: 20px; }
@@ -705,7 +690,8 @@ html.anim .live.is-on .sw-fav .ic { animation: sw-pop 7s ease-in-out infinite; }
 .getapp-text { grid-area: text; }
 .getapp h2 { font-size: clamp(1.4rem, 1.15rem + 1.2vw, 1.75rem); }
 .getapp p { color: var(--muted); }
-.getapp .store-btns { margin: 1.25rem 0 1rem; }
+.getapp .store-badges { margin: 1.25rem 0 1rem; --bh: 52px; }
+@media (max-width: 480px) { .getapp .store-badges { --bh: 44px; gap: 12px; } }
 .getapp-text p:last-child { margin-bottom: 0; }
 .contact-box { grid-area: kontakt; background: var(--surface); border-radius: var(--r); padding: 22px; box-shadow: var(--shadow); }
 .contact-box h3 { margin-bottom: .4em; }

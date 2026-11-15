@@ -98,3 +98,20 @@
     knopf.firstChild.nodeValue = kurz ? 'Mehr Fragen' : 'Weniger Fragen';
   });
 })();
+
+/* ---- „App holen“ oben: am Handy direkt in den passenden Store (seit dem 15. November 2026 in beiden Stores) ----
+   iPhone/iPad → App Store, Android → Google Play (mit Kennung utm_medium=kopf für die Zahlen der Play Console);
+   am Computer bleibt der Sprung zum Abschnitt „App holen“ mit beiden Badges. Ohne JavaScript ebenfalls der Sprung. */
+(function () {
+  'use strict';
+  var APP_STORE = 'https://apps.apple.com/de/app/mealmyday-mahlzeitenplaner/id6829561842';
+  var GOOGLE_PLAY = 'https://play.google.com/store/apps/details?id=de.jilacreatives.mealmyday&referrer=utm_source%3Dwebsite%26utm_medium%3Dkopf';
+  var ua = navigator.userAgent || '';
+  // iPadOS meldet sich wie ein Mac – dann verrät es der Touchscreen
+  var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var android = /Android/i.test(ua);
+  var ziel = ios ? APP_STORE : android ? GOOGLE_PLAY : null;
+  if (!ziel) return;
+  var knoepfe = document.querySelectorAll('.head-cta');
+  for (var i = 0; i < knoepfe.length; i++) knoepfe[i].href = ziel; // Direkt in den Store
+})();
