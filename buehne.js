@@ -15,6 +15,7 @@
   var handys = hero && hero.querySelector('.n-hero-handys');
   if (handys) {
     requestAnimationFrame(function () { requestAnimationFrame(function () { hero.classList.add('is-da'); }); });
+    setTimeout(function () { hero.classList.add('is-da'); }, 1200);   /* falls das Bild noch nicht gezeichnet wird (Tab im Hintergrund) */
     var tick = false;
     function scrollen() {
       tick = false;
