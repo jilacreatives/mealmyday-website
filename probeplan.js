@@ -39,7 +39,7 @@
   function zahl(name) { var v = parseFloat(String(form.elements[name].value).replace(',', '.')); return isNaN(v) ? NaN : v; }
   function liste(arr) { return arr.length < 2 ? arr.join('') : arr.slice(0, -1).join(', ') + ' und ' + arr[arr.length - 1]; }
 
-  /* ---- Daten einmal laden; Eckdaten aus der Datei übernehmen („über 800“ = auf volle Hundert abgerundet) ---- */
+  /* ---- Daten einmal laden; Eckdaten aus der Datei übernehmen („über 750“ = auf volle Fünfzig abgerundet) ---- */
   function load() {
     if (laden) return laden;
     laden = fetch('beispiele.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
@@ -47,7 +47,7 @@
       each(document.querySelectorAll('[data-fact]'), function (el) {
         var k = el.getAttribute('data-fact'), v = d.eckdaten && d.eckdaten[k];
         if (!v) return;
-        if (k === 'gerichte') v = Math.floor(v / 100) * 100;
+        if (k === 'gerichte') v = Math.floor(v / 50) * 50;
         el.setAttribute('data-n', v); el.textContent = fmt(v);
       });
       return d;
